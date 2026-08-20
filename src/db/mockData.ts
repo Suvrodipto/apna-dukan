@@ -835,5 +835,32 @@ const payroll = new WorkerPayrollEngine();
 await payroll.generateMonthlySalaryRecords('August', 2026);
 const bonus = payroll.calculateFestivalBonus(worker, festival);`,
     isLocked: false
+  },
+  {
+    id: 'asset-whatsapp-reminders',
+    name: 'Automated WhatsApp Reminders & Notification Engine',
+    tagline: 'Deep-link payment reminder & invoice notification generator (0 Paid API keys required)',
+    category: 'Workflow',
+    targetDomains: ['Retail Shopkeepers', 'Micro-Finance', 'Freelance Billing', 'E-Commerce Orders'],
+    description: 'A zero-cost WhatsApp messaging engine that constructs deep-linked payment collection alerts, festival greetings, and invoice receipts using the wa.me protocol directly on the user device.',
+    demoVideoDuration: '30 Seconds',
+    features: [
+      'Deep-Link Protocol (wa.me) format generator',
+      'Automated Udhaar debt collection message builder',
+      'Festival greeting & bonus announcement templates',
+      'Zero external API key dependency (100% Client-Side)'
+    ],
+    integrationCodeSnippet: `import { buildWhatsAppPaymentReminder } from '@apnadukan/whatsapp-reminders';
+
+const res = buildWhatsAppPaymentReminder({
+  recipientName: 'Ramesh Sharma',
+  phone: '+919876543210',
+  amountDue: 1450,
+  reminderType: 'Udhaar Payment'
+});
+
+window.open(res.deepLinkUrl, '_blank');`,
+    isLocked: false
   }
 ];
+

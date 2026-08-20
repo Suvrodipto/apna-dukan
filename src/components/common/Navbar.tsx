@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'ocr', label: t.billOCR, icon: ScanLine, roles: ['owner', 'cashier'], badge: 'OCR' },
     { id: 'supplier', label: t.supplierOrders, icon: Truck, roles: ['owner', 'supplier'] },
     { id: 'analytics', label: t.salesAnalytics, icon: BarChart3, roles: ['owner'] },
-    { id: 'marketplace', label: t.assetMarketplace, icon: Layers, roles: ['owner', 'cashier', 'supplier'], badge: '9 Assets' }
+    { id: 'marketplace', label: t.assetMarketplace, icon: Layers, roles: ['owner', 'cashier', 'supplier'], badge: '10 Assets' }
   ];
 
   const scrollNav = (direction: 'left' | 'right') => {
