@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #0a0a0e;
+    --bg-panel: #121218;
+    --bg-card: #181820;
+    --bg-card-hover: #1e1e28;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-gold: rgba(245, 158, 11, 0.3);
+    --primary-gold: #f59e0b;    /* Warm Amber Gold */
+    --accent-yellow: #fbbf24;   /* High-contrast Yellow */
+    --success-emerald: #10b981; /* Emerald Green */
+    --danger-red: #ef4444;      /* Flame Red */
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image: 
+      radial-gradient(at 20% 0%, rgba(245, 158, 11, 0.07) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(217, 119, 6, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: #f4f4f5;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Premium Charcoal & Gold Glassmorphism */
+.glass-panel {
+  background: rgba(18, 18, 24, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.7);
+}
+
+.glass-card {
+  background: rgba(24, 24, 32, 0.75);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -5px rgba(245, 158, 11, 0.18);
+}
+
+/* Sliding Navigation Bar Scrollbar */
+.sliding-nav-container::-webkit-scrollbar {
+  height: 4px;
+}
+.sliding-nav-container::-webkit-scrollbar-track {
+  background: rgba(14, 14, 18, 0.5);
+}
+.sliding-nav-container::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.5);
+  border-radius: 9999px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 14, 0.95);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(38, 38, 48, 0.85);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.85);
+}
+
+/* Keyframe animations */
+@keyframes pulse-amber {
+  0%, 100% { box-shadow: 0 0 16px rgba(245, 158, 11, 0.35); }
+  50% { box-shadow: 0 0 28px rgba(245, 158, 11, 0.65); }
+}
+
+.animate-glow {
+  animation: pulse-amber 3s infinite ease-in-out;
+}
+
+@keyframes scan-line {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+.animate-scan {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #fbbf24, #10b981, transparent);
+  box-shadow: 0 0 16px #f59e0b;
+  animation: scan-line 2s infinite ease-in-out;
+}
+
+/* Receipt Rolling Printer Animation */
+@keyframes roll-out {
+  0% {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px) scaleY(0.1);
+  }
+  100% {
+    max-height: 850px;
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.animate-receipt-roll {
+  animation: roll-out 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top center;
+}
+
+/* Barcode Laser Scan Effect */
+@keyframes barcode-laser {
+  0% { left: 0%; opacity: 0.8; }
+  50% { left: 95%; opacity: 1; }
+  100% { left: 0%; opacity: 0.8; }
+}
+
+.animate-laser {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ef4444;
+  box-shadow: 0 0 12px #ef4444, 0 0 20px #ef4444;
+  animation: barcode-laser 1.5s infinite ease-in-out;
+}
+
+/* Print CSS for POS & Ledger Invoices */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-area, .printable-area * {
+    visibility: visible;
+  }
+  .printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: black !important;
+    background: white !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
