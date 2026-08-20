@@ -861,6 +861,27 @@ const res = buildWhatsAppPaymentReminder({
 
 window.open(res.deepLinkUrl, '_blank');`,
     isLocked: false
+  },
+  {
+    id: 'asset-dashboard-analytics',
+    name: 'Executive Dashboard & Business Analytics Engine',
+    tagline: 'Visual sales KPI dashboard, category breakdowns, and net profit velocity tracker',
+    category: 'Analytics',
+    targetDomains: ['Executive Dashboards', 'Retail Shopkeepers', 'B2B Analytics', 'SaaS Metrics'],
+    description: 'A modular analytics engine calculating real-time sales KPIs, average order values (AOV), category profit share breakdowns, and projected monthly net margins.',
+    demoVideoDuration: '35 Seconds',
+    features: [
+      'Real-time Sales Revenue, AOV, and Bill Volume metrics',
+      'Category revenue share percentage calculations',
+      'Monthly Net Profit vs Operating Expense series model',
+      'Interactive visual charts & CSV data export'
+    ],
+    integrationCodeSnippet: `import { calculateExecutiveDashboardMetrics } from '@apnadukan/dashboard-analytics';
+
+const metrics = calculateExecutiveDashboardMetrics(210000, 142);
+console.log('Revenue KPI:', metrics[0].value);`,
+    isLocked: false
   }
 ];
+
 
