@@ -144,6 +144,7 @@ export interface TradableAsset {
   features: string[];
   integrationCodeSnippet: string;
   isLocked: boolean;
+  githubModuleUrl?: string;
 }
 
 export interface SmartOffer {
