@@ -180,6 +180,138 @@ export const INITIAL_PRODUCTS: Product[] = [
     minReorderQty: 8,
     unit: 'pack',
     lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-16',
+    name: 'Maggi 2-Minute Noodles 12-Pack (504g)',
+    category: 'Groceries',
+    barcode: '8901058004561',
+    costPrice: 145,
+    sellingPrice: 168,
+    stockQty: 35,
+    minReorderQty: 10,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-17',
+    name: 'Catch Turmeric Powder (Haldi) 200g',
+    category: 'Spices',
+    barcode: '8901594100223',
+    costPrice: 48,
+    sellingPrice: 58,
+    stockQty: 40,
+    minReorderQty: 15,
+    unit: 'box',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-18',
+    name: 'Fortune Kachi Ghani Mustard Oil 1L',
+    category: 'Groceries',
+    barcode: '8906007280055',
+    costPrice: 142,
+    sellingPrice: 160,
+    stockQty: 16,
+    minReorderQty: 10,
+    unit: 'pouch',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-19',
+    name: 'Taj Mahal Tea Premium 500g Pack',
+    category: 'Beverages',
+    barcode: '8901030010998',
+    costPrice: 340,
+    sellingPrice: 395,
+    stockQty: 22,
+    minReorderQty: 8,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-20',
+    name: 'Parle-G Gold Biscuit Family Pack 1kg',
+    category: 'Packaged Goods',
+    barcode: '8901030112233',
+    costPrice: 115,
+    sellingPrice: 135,
+    stockQty: 50,
+    minReorderQty: 15,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-21',
+    name: 'Dettol Antiseptic Soap 125g (Buy 3 Get 1)',
+    category: 'Personal & Home',
+    barcode: '8901396001122',
+    costPrice: 140,
+    sellingPrice: 165,
+    stockQty: 28,
+    minReorderQty: 10,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-22',
+    name: 'Vim Dishwash Gel Lemon 750ml Bottle',
+    category: 'Personal & Home',
+    barcode: '8901030998877',
+    costPrice: 155,
+    sellingPrice: 180,
+    stockQty: 19,
+    minReorderQty: 8,
+    unit: 'bottle',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-23',
+    name: 'Colgate Strong Teeth Toothpaste 500g',
+    category: 'Personal & Home',
+    barcode: '8901314002211',
+    costPrice: 210,
+    sellingPrice: 245,
+    stockQty: 24,
+    minReorderQty: 10,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-24',
+    name: 'Real Fruit Power Mixed Fruit Juice 1L',
+    category: 'Beverages',
+    barcode: '8901207001144',
+    costPrice: 98,
+    sellingPrice: 115,
+    stockQty: 30,
+    minReorderQty: 12,
+    unit: 'tetra',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-25',
+    name: 'Tata Sampann Unpolished Toor Dal 1kg',
+    category: 'Groceries',
+    barcode: '8901058889900',
+    costPrice: 155,
+    sellingPrice: 185,
+    stockQty: 20,
+    minReorderQty: 8,
+    unit: 'packet',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-26',
+    name: 'Brooke Bond Red Label Tea 1kg',
+    category: 'Beverages',
+    barcode: '8901030001122',
+    costPrice: 450,
+    sellingPrice: 510,
+    stockQty: 14,
+    minReorderQty: 6,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
   }
 ];
 
@@ -251,6 +383,112 @@ export const INITIAL_CUSTOMERS: Customer[] = [
     lastTransactionDate: '2026-08-19',
     isVIP: true,
     loyaltyTier: 'VIP Gold'
+  },
+  {
+    id: 'cust-7',
+    name: 'Suresh Kumar',
+    phone: '+91 98221 44556',
+    address: 'House 89, Mandi Chowk',
+    currentBalance: 3850,
+    creditLimit: 3000,
+    riskScore: 'High',
+    lastTransactionDate: '2026-08-10'
+  },
+  {
+    id: 'cust-8',
+    name: 'Vikram Singh',
+    phone: '+91 97112 33445',
+    address: 'Shop 4, Old Grain Market',
+    currentBalance: 4900,
+    creditLimit: 4000,
+    riskScore: 'High',
+    lastTransactionDate: '2026-08-08'
+  },
+  {
+    id: 'cust-9',
+    name: 'Kavita Reddy',
+    phone: '+91 99456 77889',
+    address: 'Flat 402, Lake View Towers',
+    currentBalance: 1650,
+    creditLimit: 2500,
+    riskScore: 'Medium',
+    lastTransactionDate: '2026-08-14'
+  },
+  {
+    id: 'cust-10',
+    name: 'Manoj Tiwari',
+    phone: '+91 98711 22334',
+    address: 'Plot 12, Station Road',
+    currentBalance: 2100,
+    creditLimit: 3000,
+    riskScore: 'Medium',
+    lastTransactionDate: '2026-08-16'
+  },
+  {
+    id: 'cust-11',
+    name: 'Meenakshi Iyer',
+    phone: '+91 94432 11099',
+    address: 'Block C, Rose Apartments',
+    currentBalance: 450,
+    creditLimit: 5000,
+    riskScore: 'Low',
+    lastTransactionDate: '2026-08-19',
+    isVIP: true,
+    loyaltyTier: 'VIP Gold'
+  },
+  {
+    id: 'cust-12',
+    name: 'Deepak Agarwal',
+    phone: '+91 98100 55443',
+    address: 'Agarwal Sweets, Main Bazar',
+    currentBalance: 0,
+    creditLimit: 10000,
+    riskScore: 'Low',
+    lastTransactionDate: '2026-08-19',
+    isVIP: true,
+    loyaltyTier: 'VIP Gold'
+  },
+  {
+    id: 'cust-13',
+    name: 'Alok Nath Chaurasia',
+    phone: '+91 99345 66778',
+    address: 'Betel Shop Corner, Mandi',
+    currentBalance: 2950,
+    creditLimit: 2000,
+    riskScore: 'High',
+    lastTransactionDate: '2026-08-05'
+  },
+  {
+    id: 'cust-14',
+    name: 'Pooja Deshmukh',
+    phone: '+91 98670 12345',
+    address: 'B-304, Sunshine Enclave',
+    currentBalance: 1200,
+    creditLimit: 2000,
+    riskScore: 'Medium',
+    lastTransactionDate: '2026-08-17'
+  },
+  {
+    id: 'cust-15',
+    name: 'Harpreet Kaur',
+    phone: '+91 98140 88776',
+    address: 'GT Road, Model Town',
+    currentBalance: 890,
+    creditLimit: 4000,
+    riskScore: 'Low',
+    lastTransactionDate: '2026-08-18',
+    isVIP: true,
+    loyaltyTier: 'VIP Gold'
+  },
+  {
+    id: 'cust-16',
+    name: 'Gopal Swaroop',
+    phone: '+91 97654 32109',
+    address: 'Swaroop General Store, Main Market',
+    currentBalance: 0,
+    creditLimit: 6000,
+    riskScore: 'Low',
+    lastTransactionDate: '2026-08-19'
   }
 ];
 

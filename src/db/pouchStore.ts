@@ -81,11 +81,25 @@ export class PouchStoreManager {
       const prodCount = await db.products.count();
       if (prodCount === 0) {
         await db.products.bulkAdd(INITIAL_PRODUCTS);
+      } else {
+        const existingProds = await db.products.toArray();
+        for (const p of INITIAL_PRODUCTS) {
+          if (!existingProds.some(ep => ep.id === p.id)) {
+            await db.products.put(p);
+          }
+        }
       }
 
       const custCount = await db.customers.count();
       if (custCount === 0) {
         await db.customers.bulkAdd(INITIAL_CUSTOMERS);
+      } else {
+        const existingCusts = await db.customers.toArray();
+        for (const c of INITIAL_CUSTOMERS) {
+          if (!existingCusts.some(ec => ec.id === c.id)) {
+            await db.customers.put(c);
+          }
+        }
       }
 
       const ledCount = await db.ledger.count();
