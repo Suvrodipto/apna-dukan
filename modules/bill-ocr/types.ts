@@ -4,6 +4,8 @@ export interface ParsedOCRLineItem {
   unitPrice: number;
   totalPrice: number;
   confidence: number;
+  previousUnitPrice?: number;
+  priceChangePercent?: number;
 }
 
 export interface BillOCRResult {
@@ -17,4 +19,11 @@ export interface BillOCRResult {
   grandTotal: number;
   rawText: string;
   confidenceScore: number;
+  aiSummary?: {
+    totalPurchase: number;
+    itemsAddedCount: number;
+    supplierPriceIncreaseTotal: number;
+    highestValueItemName: string;
+    estimatedProfitMarginPercent: number;
+  };
 }
