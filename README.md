@@ -18,6 +18,7 @@
 | **6** | **📦 Smart Inventory & Emergency Restock Engine** | Inventory | Standalone Auto-PO Module | **₹3.80 Cr** | ₹2.75 Cr | [`/modules/smart-inventory`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/smart-inventory) |
 | **7** | **💬 WhatsApp Reminders & Notification Engine** | Messaging | Client-Side Deep-Link Kit | **₹3.75 Cr** | ₹2.50 Cr | [`/modules/whatsapp-reminders-notifications`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/whatsapp-reminders-notifications) |
 | **8** | **📊 Executive Dashboard & Business Analytics** | Analytics | Visual KPI Dashboard | **₹3.60 Cr** | ₹2.50 Cr | [`/modules/dashboard-analytics`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/dashboard-analytics) |
+| **9** | **🎯 Smart Price & Profit ML Predictor Engine** | ML Analytics | Standalone ML Model | **₹4.00 Cr** | ₹3.00 Cr | [`/modules/price-predictor`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/price-predictor) |
 
 ---
 
