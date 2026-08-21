@@ -150,6 +150,8 @@ export interface TradableAsset {
   integrationCodeSnippet: string;
   isLocked: boolean;
   githubModuleUrl?: string;
+  askingPriceCr: number;
+  minPriceCr?: number;
 }
 
 export interface SmartOffer {

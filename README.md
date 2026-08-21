@@ -4,30 +4,30 @@
 
 ---
 
+## 🏆 HACQUIRE 2026 - Official Tradable Asset Pricing & Listing Table
+
+*Submitted for **Google Form Registration** and **Trading Floor Execution** (Virtual Capital: **₹10.00 Crore FED Coins** per team).*
+
+| # | Tradable Asset Module | Category | Deliverable Format | Asking Price (₹ Cr FED Coins) | Floor Price (₹ Cr) | Standalone Module GitHub Link |
+| :-: | :--- | :--- | :--- | :-: | :-: | :--- |
+| **1** | **🌐 Universal Low-Connectivity Sync Layer** | Offline Sync | Standalone Component & API | **₹4.80 Cr** | ₹3.50 Cr | [`/modules/low-connectivity-sync`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/low-connectivity-sync) |
+| **2** | **📄 Client-Side Bill & Document OCR Component** | Computer Vision | Standalone WASM Engine | **₹4.50 Cr** | ₹3.25 Cr | [`/modules/bill-ocr`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/bill-ocr) |
+| **3** | **👷 Worker Management & Festival Payroll Engine** | HR & Payroll | Standalone HR Directory | **₹4.25 Cr** | ₹3.00 Cr | [`/modules/worker-management`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/worker-management) |
+| **4** | **📈 Sales Analytics & Price Predictor Engine** | ML Analytics | Standalone ML Model | **₹4.00 Cr** | ₹3.00 Cr | [`/modules/sales-analytics`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/sales-analytics) |
+| **5** | **📖 Khata Credit & Udhaar Ledger Engine** | Ledger | Double-Entry Ledger Kit | **₹3.90 Cr** | ₹2.80 Cr | [`/modules/khata-ledger`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/khata-ledger) |
+| **6** | **📦 Smart Inventory & Emergency Restock Engine** | Inventory | Standalone Auto-PO Module | **₹3.80 Cr** | ₹2.75 Cr | [`/modules/smart-inventory`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/smart-inventory) |
+| **7** | **💬 WhatsApp Reminders & Notification Engine** | Messaging | Client-Side Deep-Link Kit | **₹3.75 Cr** | ₹2.50 Cr | [`/modules/whatsapp-reminders-notifications`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/whatsapp-reminders-notifications) |
+| **8** | **📊 Executive Dashboard & Business Analytics** | Analytics | Visual KPI Dashboard | **₹3.60 Cr** | ₹2.50 Cr | [`/modules/dashboard-analytics`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/dashboard-analytics) |
+
+---
+
 ## 🎬 30–45 Second Demo Videos & Interactive Demo Studio
 
-Judges and hackathon participants can view interactive 30–45 second video demos of all separable assets directly inside the application under the **Tradable Asset Marketplace & Demo Studio** tab, or directly via the standalone GitHub module directories below.
+Judges and hackathon participants can view interactive 30–45 second video demos of all separable assets directly inside the application under the **Tradable Asset Marketplace & Demo Studio** tab, or directly via the standalone GitHub module directories above.
 
 ### 🎥 How to Access Video Demos:
 1. **Live Interactive Demo Studio in Web App**: Launch the app at `http://localhost:5173/`, navigate to **Asset Marketplace**, select any asset, and click **▶️ Play 30–45s Video Demo**.
 2. **AI Presentation Pitch Simulator**: Click the **✨ SHOW AI IN ACTION** button in the top navigation bar to run the automated 45-second judge presentation walkthrough.
-
----
-
-## 📦 Standalone Tradable Asset Suite (`/modules`)
-
-Each asset below is completely separable with zero cross-module coupling, its own `README.md`, `types.ts`, `index.ts`, and `.env.example`:
-
-| # | Standalone Module Name | Category | Video Demo Duration | Direct GitHub Repository Folder Link |
-| :-: | :--- | :--- | :-: | :--- |
-| **1** | **👷 Worker Management & Festival Bonus** | HR & Payroll | `40 Seconds` | [📁 `/modules/worker-management`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/worker-management) |
-| **2** | **📦 Smart Inventory & Emergency Restock** | Inventory | `35 Seconds` | [📁 `/modules/smart-inventory`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/smart-inventory) |
-| **3** | **📖 Khata Credit & Udhaar Ledger Engine** | Ledger | `30 Seconds` | [📁 `/modules/khata-ledger`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/khata-ledger) |
-| **4** | **📄 Client-Side Bill & Document OCR** | Computer Vision | `40 Seconds` | [📁 `/modules/bill-ocr`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/bill-ocr) |
-| **5** | **📈 Sales Analytics & Price Predictor Engine** | ML Analytics | `35 Seconds` | [📁 `/modules/sales-analytics`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/sales-analytics) |
-| **6** | **🌐 Universal Low-Connectivity Sync Layer** | Offline Sync | `35 Seconds` | [📁 `/modules/low-connectivity-sync`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/low-connectivity-sync) |
-| **7** | **💬 WhatsApp Reminders & Notifications** | Messaging | `30 Seconds` | [📁 `/modules/whatsapp-reminders-notifications`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/whatsapp-reminders-notifications) |
-| **8** | **📊 Executive Dashboard & Business Analytics** | Analytics | `35 Seconds` | [📁 `/modules/dashboard-analytics`](file:///C:/Users/KIIT/.gemini/antigravity-ide/scratch/dukaan-os/modules/dashboard-analytics) |
 
 ---
 
@@ -63,4 +63,4 @@ npm run build
 ---
 
 ## 📄 License & Hackathon Notice
-Created for the Hackathon Pitch & Dealmaking Exchange. All modular assets are licensed for team trading under MIT standards.
+Created for **HACQUIRE 2026 Pitch & Dealmaking Exchange**. All modular assets are licensed for team trading under MIT standards.

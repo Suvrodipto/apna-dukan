@@ -184,9 +184,14 @@ export const TradableAssetStudio: React.FC = () => {
                       {asset.category === 'AI' && <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />}
                       <span className="font-bold text-white text-xs leading-snug">{asset.name}</span>
                     </div>
-                    <span className="px-2 py-0.5 text-[9px] font-bold bg-[#181824] text-amber-300 rounded-full font-mono shrink-0 border border-slate-800">
-                      {asset.demoVideoDuration}
-                    </span>
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <span className="px-2 py-0.5 text-[10px] font-black bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 rounded-full font-mono shadow">
+                        ₹{asset.askingPriceCr.toFixed(2)} Cr
+                      </span>
+                      <span className="text-[9px] text-slate-400 font-mono">
+                        {asset.demoVideoDuration}
+                      </span>
+                    </div>
                   </div>
 
                   <p className="text-[11px] text-slate-400 line-clamp-2">{asset.tagline}</p>
@@ -213,6 +218,9 @@ export const TradableAssetStudio: React.FC = () => {
                 <h3 className="text-lg font-black text-white">{selectedAsset.name}</h3>
                 <span className="px-2.5 py-0.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full">
                   {selectedAsset.category} Asset
+                </span>
+                <span className="px-3 py-1 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black font-mono text-xs rounded-full shadow">
+                  Asking Price: ₹{selectedAsset.askingPriceCr.toFixed(2)} Cr
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-1">{selectedAsset.description}</p>

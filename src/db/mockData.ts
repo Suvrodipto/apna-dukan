@@ -614,16 +614,17 @@ export const INITIAL_PURCHASE_ORDERS: PurchaseOrder[] = [
   {
     id: 'po-102',
     poNumber: 'PO-2026-08-02',
-    supplierId: 'supp-3',
-    supplierName: 'Hindustan Unilever Distribution',
-    dateCreated: '2026-08-19 14:15',
-    expectedDelivery: '2026-08-21',
+    supplierId: 'supp-1',
+    supplierName: 'Metro Wholesale Trading Co.',
+    dateCreated: '2026-08-18 14:15',
+    expectedDelivery: '2026-08-19',
     items: [
-      { productId: 'prod-6', productName: 'Surf Excel Easy Wash Detergent Powder 1kg', orderQty: 25, unitPrice: 110 }
+      { productId: 'prod-1', productName: 'Aashirvaad Shuddh Chakki Atta 5kg', orderQty: 15, unitPrice: 210 },
+      { productId: 'prod-2', productName: 'Fortune Sunlite Sunflower Oil 1L', orderQty: 20, unitPrice: 125 }
     ],
-    totalAmount: 2750,
-    status: 'Draft',
-    notes: 'Urgent restock due to high customer demand.',
+    totalAmount: 5650,
+    status: 'Fulfilled',
+    notes: 'Bulk flour & oil shipment.',
     syncStatus: 'synced'
   }
 ];
@@ -718,26 +719,26 @@ export const INITIAL_WORKERS: WorkerProfile[] = [
     id: 'w-3',
     workerId: 'EMP-103',
     name: 'Anjali Sharma',
-    phone: '+91 99345 66778',
-    address: 'Plot 18, Shanti Nagar',
-    designation: 'Store Manager',
-    joiningDate: '2023-11-10',
-    monthlySalary: 25000,
+    phone: '+91 97234 88990',
+    address: 'Sector 8, Colony B-12',
+    designation: 'Accountant',
+    joiningDate: '2025-01-10',
+    monthlySalary: 22000,
     status: 'Active',
-    createdAt: '2023-11-10',
+    createdAt: '2025-01-10',
     updatedAt: '2026-08-01'
   },
   {
     id: 'w-4',
     workerId: 'EMP-104',
-    name: 'Suresh Chand Gupta',
-    phone: '+91 97112 88990',
-    address: 'House 88, Sector 12',
+    name: 'Sunil Kumar Paswan',
+    phone: '+91 99112 33445',
+    address: 'Station Basti, House 90',
     designation: 'Delivery Executive',
-    joiningDate: '2025-01-05',
-    monthlySalary: 15000,
+    joiningDate: '2025-05-20',
+    monthlySalary: 16000,
     status: 'Active',
-    createdAt: '2025-01-05',
+    createdAt: '2025-05-20',
     updatedAt: '2026-08-01'
   }
 ];
@@ -750,10 +751,10 @@ export const INITIAL_SALARY_RECORDS: SalaryRecord[] = [
     month: 'August',
     year: 2026,
     baseSalary: 18000,
-    festivalBonus: 1800, // 10% Diwali Bonus
+    festivalBonus: 1000,
     otherBonus: 500,
     deductions: 0,
-    totalPayable: 20300,
+    totalPayable: 19500,
     paymentStatus: 'Pending'
   },
   {
@@ -763,10 +764,10 @@ export const INITIAL_SALARY_RECORDS: SalaryRecord[] = [
     month: 'August',
     year: 2026,
     baseSalary: 14000,
-    festivalBonus: 1400,
+    festivalBonus: 1000,
     otherBonus: 300,
-    deductions: 200,
-    totalPayable: 15500,
+    deductions: 0,
+    totalPayable: 15300,
     paymentStatus: 'Pending'
   },
   {
@@ -775,33 +776,48 @@ export const INITIAL_SALARY_RECORDS: SalaryRecord[] = [
     workerName: 'Anjali Sharma',
     month: 'August',
     year: 2026,
-    baseSalary: 25000,
-    festivalBonus: 2500,
+    baseSalary: 22000,
+    festivalBonus: 2000,
     otherBonus: 1000,
     deductions: 0,
-    totalPayable: 28500,
+    totalPayable: 25000,
     paymentStatus: 'Paid',
-    paymentDate: '2026-08-05',
+    paymentDate: '2026-08-19',
     paymentMode: 'UPI'
   },
   {
     id: 'sal-4',
     workerId: 'w-4',
-    workerName: 'Suresh Chand Gupta',
+    workerName: 'Sunil Kumar Paswan',
     month: 'August',
     year: 2026,
-    baseSalary: 15000,
-    festivalBonus: 1500,
+    baseSalary: 16000,
+    festivalBonus: 1000,
     otherBonus: 0,
-    deductions: 0,
+    deductions: 500,
     totalPayable: 16500,
     paymentStatus: 'Paid',
-    paymentDate: '2026-08-07',
-    paymentMode: 'Cash'
+    paymentDate: '2026-08-18',
+    paymentMode: 'Bank Transfer'
   }
 ];
 
 export const INITIAL_FESTIVALS: FestivalItem[] = [
+  {
+    id: 'fest-raksha-bandhan',
+    name: 'Raksha Bandhan',
+    date: '2026-08-28',
+    month: 8,
+    day: 28,
+    year: 2026,
+    description: 'Celebration of sibling bond. ₹1,000 festival bonus for all workers.',
+    isActive: true,
+    bonusEnabled: true,
+    bonusType: 'Fixed',
+    bonusValue: 1000,
+    eligibilityType: 'All',
+    emoji: '🧵'
+  },
   {
     id: 'fest-diwali',
     name: 'Diwali (Festival of Lights)',
@@ -809,7 +825,7 @@ export const INITIAL_FESTIVALS: FestivalItem[] = [
     month: 11,
     day: 8,
     year: 2026,
-    description: 'Grand Indian Festival of Lights. Traditional 10% salary bonus enabled for all shop workers.',
+    description: 'Grand Diwali celebration. 10% monthly salary festival bonus.',
     isActive: true,
     bonusEnabled: true,
     bonusType: 'Percentage',
@@ -824,7 +840,7 @@ export const INITIAL_FESTIVALS: FestivalItem[] = [
     month: 3,
     day: 4,
     year: 2026,
-    description: 'Festival of colors and spring celebration. 5% festive bonus.',
+    description: 'Festive bonus and sweets distribution.',
     isActive: true,
     bonusEnabled: true,
     bonusType: 'Percentage',
@@ -861,21 +877,6 @@ export const INITIAL_FESTIVALS: FestivalItem[] = [
     bonusValue: 1000,
     eligibilityType: 'All',
     emoji: '🏹'
-  },
-  {
-    id: 'fest-raksha-bandhan',
-    name: 'Raksha Bandhan',
-    date: '2026-08-28',
-    month: 8,
-    day: 28,
-    year: 2026,
-    description: 'Celebration of sibling bond. ₹1,000 festival bonus for all workers.',
-    isActive: true,
-    bonusEnabled: true,
-    bonusType: 'Fixed',
-    bonusValue: 1000,
-    eligibilityType: 'All',
-    emoji: '🧵'
   },
   {
     id: 'fest-janmashtami',
@@ -1018,7 +1019,9 @@ const syncEngine = new SyncEngine({
 });
 
 await syncEngine.saveMutation('PATIENT_RECORD', { id: 'p101', status: 'CRITICAL' });`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 4.80,
+    minPriceCr: 3.50
   },
   {
     id: 'asset-ocr-engine',
@@ -1042,7 +1045,9 @@ const result = await ExtractInvoiceData(fileInput.files[0], {
 });
 
 console.log('Extracted Store:', result.storeName);`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 4.50,
+    minPriceCr: 3.25
   },
   {
     id: 'asset-khata-ledger',
@@ -1066,7 +1071,9 @@ const customerRisk = ledger.calculateRiskScore({
   creditLimit: 2500,
   daysOverdue: 14
 });`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 3.90,
+    minPriceCr: 2.80
   },
   {
     id: 'asset-ai-promotions',
@@ -1088,7 +1095,9 @@ const service = new AIPromotionService();
 const offers = service.generateInventoryOffers(productsList);
 
 console.log('Suggested Offer:', offers[0].discountBadge);`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 3.75,
+    minPriceCr: 2.50
   },
   {
     id: 'asset-smart-restock',
@@ -1109,7 +1118,9 @@ console.log('Suggested Offer:', offers[0].discountBadge);`,
 const restock = new SmartRestockEngine();
 const options = await restock.getSupplierRates(product.id);
 await restock.dispatchPO(options[0].supplierId, 50);`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 3.80,
+    minPriceCr: 2.75
   },
   {
     id: 'asset-pitch-simulation',
@@ -1131,7 +1142,9 @@ await restock.dispatchPO(options[0].supplierId, 50);`,
   isOpen={showPitchModal}
   onClose={() => setShowPitchModal(false)}
 />`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 3.50,
+    minPriceCr: 2.25
   },
   {
     id: 'asset-price-predictor',
@@ -1152,7 +1165,9 @@ await restock.dispatchPO(options[0].supplierId, 50);`,
 const predictor = new SmartPricePredictor();
 const rec = predictor.predictOptimalPrice(product);
 console.log('Rec Price:', rec.recommendedPrice);`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 4.00,
+    minPriceCr: 3.00
   },
   {
     id: 'asset-supplier-ai',
@@ -1174,7 +1189,9 @@ console.log('Rec Price:', rec.recommendedPrice);`,
   isOpen={showSupplierChat}
   onClose={() => setShowSupplierChat(false)}
 />`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 4.25,
+    minPriceCr: 3.10
   },
   {
     id: 'asset-worker-festival-payroll',
@@ -1195,7 +1212,9 @@ console.log('Rec Price:', rec.recommendedPrice);`,
 const payroll = new WorkerPayrollEngine();
 await payroll.generateMonthlySalaryRecords('August', 2026);
 const bonus = payroll.calculateFestivalBonus(worker, festival);`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 4.25,
+    minPriceCr: 3.00
   },
   {
     id: 'asset-whatsapp-reminders',
@@ -1221,7 +1240,9 @@ const res = buildWhatsAppPaymentReminder({
 });
 
 window.open(res.deepLinkUrl, '_blank');`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 3.75,
+    minPriceCr: 2.50
   },
   {
     id: 'asset-dashboard-analytics',
@@ -1241,8 +1262,8 @@ window.open(res.deepLinkUrl, '_blank');`,
 
 const metrics = calculateExecutiveDashboardMetrics(210000, 142);
 console.log('Revenue KPI:', metrics[0].value);`,
-    isLocked: false
+    isLocked: false,
+    askingPriceCr: 3.60,
+    minPriceCr: 2.50
   }
 ];
-
-
