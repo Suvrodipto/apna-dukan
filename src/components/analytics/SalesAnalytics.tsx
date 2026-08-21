@@ -90,6 +90,59 @@ export const SalesAnalytics: React.FC = () => {
         </button>
       </div>
 
+      {/* 🧠 AI BUSINESS HEALTH CARD */}
+      <div className="bg-gradient-to-r from-[#12121e] via-[#161628] to-[#12121e] p-5 rounded-3xl border border-amber-500/40 shadow-2xl space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-xl shadow-lg">
+              🧠
+            </div>
+            <div>
+              <h3 className="font-extrabold text-white text-base tracking-tight">AI BUSINESS HEALTH</h3>
+              <p className="text-xs text-amber-300 font-mono">Autonomous Shop Diagnostic Score</p>
+            </div>
+          </div>
+
+          <div className="text-right font-mono">
+            <div className="text-2xl font-black text-amber-400 tracking-wider">82 / 100</div>
+            <div className="text-[10px] text-emerald-400 font-bold flex items-center justify-end gap-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              ●●●●●●●●○○
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
+          <div className="p-3 bg-[#0d0d14] rounded-2xl border border-slate-800 space-y-1">
+            <div className="text-slate-400 font-bold text-[10px] uppercase">Business Status</div>
+            <div className="text-emerald-400 font-black text-xs flex items-center gap-1.5">
+              <span>🟢</span> Business is growing
+            </div>
+          </div>
+
+          <div className="p-3 bg-[#0d0d14] rounded-2xl border border-slate-800 space-y-1">
+            <div className="text-slate-400 font-bold text-[10px] uppercase">Sales Velocity</div>
+            <div className="text-amber-400 font-black text-xs flex items-center gap-1.5">
+              <span>↑</span> Sales +18.4%
+            </div>
+          </div>
+
+          <div className="p-3 bg-[#0d0d14] rounded-2xl border border-slate-800 space-y-1">
+            <div className="text-slate-400 font-bold text-[10px] uppercase">Udhaar Credit Risk</div>
+            <div className="text-amber-300 font-black text-xs flex items-center gap-1.5">
+              <span>⚠</span> ₹5,430 credit outstanding
+            </div>
+          </div>
+
+          <div className="p-3 bg-[#0d0d14] rounded-2xl border border-slate-800 space-y-1">
+            <div className="text-slate-400 font-bold text-[10px] uppercase">Inventory Health</div>
+            <div className="text-rose-400 font-black text-xs flex items-center gap-1.5">
+              <span>🔴</span> {lowStockCount || 3} products need reorder
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2">
           <div className="flex items-center justify-between text-slate-400 text-xs">

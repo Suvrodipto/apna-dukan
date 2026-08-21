@@ -96,6 +96,90 @@ export const INITIAL_PRODUCTS: Product[] = [
     minReorderQty: 10,
     unit: 'bar',
     lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-9',
+    name: 'Organic Kashmiri Saffron (Kesar 5g)',
+    category: 'Spices & Premium',
+    barcode: '8908001234001',
+    costPrice: 1600,
+    sellingPrice: 1950,
+    stockQty: 12,
+    minReorderQty: 5,
+    unit: 'box',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-10',
+    name: 'Royal Dry Fruits Festive Gift Box 1kg',
+    category: 'Dry Fruits & Hampers',
+    barcode: '8908001234002',
+    costPrice: 1850,
+    sellingPrice: 2250,
+    stockQty: 15,
+    minReorderQty: 5,
+    unit: 'box',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-11',
+    name: 'Premium Desi Cow Ghee 5L Tin',
+    category: 'Dairy & Ghee',
+    barcode: '8901262090012',
+    costPrice: 3200,
+    sellingPrice: 3850,
+    stockQty: 8,
+    minReorderQty: 3,
+    unit: 'tin',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-12',
+    name: 'Daawat Rozana Super Basmati Rice 25kg Bag',
+    category: 'Groceries',
+    barcode: '8901594990018',
+    costPrice: 2400,
+    sellingPrice: 2850,
+    stockQty: 10,
+    minReorderQty: 4,
+    unit: 'bag',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-13',
+    name: 'Ferrero Rocher Premium Chocolate Box 24 Pcs',
+    category: 'Packaged Goods',
+    barcode: '8000500003008',
+    costPrice: 850,
+    sellingPrice: 1050,
+    stockQty: 20,
+    minReorderQty: 5,
+    unit: 'box',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-14',
+    name: 'Nescafe Gold Premium Blend Coffee 200g Jar',
+    category: 'Beverages',
+    barcode: '8901058200112',
+    costPrice: 620,
+    sellingPrice: 750,
+    stockQty: 18,
+    minReorderQty: 6,
+    unit: 'jar',
+    lastUpdated: '2026-08-19'
+  },
+  {
+    id: 'prod-15',
+    name: 'Everyday Premium Almonds (Badam) 1kg Pack',
+    category: 'Dry Fruits & Hampers',
+    barcode: '8908001234015',
+    costPrice: 750,
+    sellingPrice: 890,
+    stockQty: 25,
+    minReorderQty: 8,
+    unit: 'pack',
+    lastUpdated: '2026-08-19'
   }
 ];
 
@@ -105,10 +189,10 @@ export const INITIAL_CUSTOMERS: Customer[] = [
     name: 'Ramesh Sharma',
     phone: '+91 98765 43210',
     address: 'Flat 302, Sai Residency, Main Road',
-    currentBalance: 1450,
+    currentBalance: 2000,
     creditLimit: 3000,
     riskScore: 'Low',
-    lastTransactionDate: '2026-08-18',
+    lastTransactionDate: '2026-07-24',
     isVIP: true,
     loyaltyTier: 'VIP Gold'
   },
@@ -117,7 +201,7 @@ export const INITIAL_CUSTOMERS: Customer[] = [
     name: 'Sunita Verma',
     phone: '+91 98123 67890',
     address: 'House No. 45, Green Park Society',
-    currentBalance: 3200,
+    currentBalance: 3430,
     creditLimit: 2500,
     riskScore: 'High',
     lastTransactionDate: '2026-08-15',
@@ -143,6 +227,30 @@ export const INITIAL_CUSTOMERS: Customer[] = [
     creditLimit: 2000,
     riskScore: 'Medium',
     lastTransactionDate: '2026-08-17'
+  },
+  {
+    id: 'cust-5',
+    name: 'Rajesh Gupta',
+    phone: '+91 98345 11223',
+    address: 'Station Mandi Gali #4',
+    currentBalance: 1200,
+    creditLimit: 4000,
+    riskScore: 'Low',
+    lastTransactionDate: '2026-08-18',
+    isVIP: true,
+    loyaltyTier: 'VIP Gold'
+  },
+  {
+    id: 'cust-6',
+    name: 'Vikram Malhotra',
+    phone: '+91 91234 99887',
+    address: 'Civil Lines, House 102',
+    currentBalance: 0,
+    creditLimit: 10000,
+    riskScore: 'Low',
+    lastTransactionDate: '2026-08-19',
+    isVIP: true,
+    loyaltyTier: 'VIP Gold'
   }
 ];
 
