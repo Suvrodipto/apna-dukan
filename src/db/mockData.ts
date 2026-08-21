@@ -548,16 +548,6 @@ export const INITIAL_LEDGER: LedgerEntry[] = [
 
 export const INITIAL_SUPPLIERS: Supplier[] = [
   {
-    id: 'supp-1',
-    name: 'Metro Wholesale Trading Co.',
-    contactPerson: 'Vikram Singh',
-    phone: '+91 98990 11223',
-    email: 'orders@metrowholesale.in',
-    category: 'FMCG & Groceries',
-    address: 'Warehouse Block C, Transport Nagar',
-    rating: 4.8
-  },
-  {
     id: 'supp-2',
     name: 'Amul Dairy Distributors Ltd.',
     contactPerson: 'Rajesh Mehta',
@@ -565,7 +555,27 @@ export const INITIAL_SUPPLIERS: Supplier[] = [
     email: 'supply@amuldistributors.com',
     category: 'Dairy & Cold Storage',
     address: 'Plot 12, Industrial Area Phase 1',
-    rating: 4.9
+    rating: 4.9,
+    reliabilityScore: 96,
+    deliveryTimeDays: 1.2,
+    priceCompetitiveness: 'Best',
+    fulfillmentRatePercent: 99.2,
+    isAIRecommended: true
+  },
+  {
+    id: 'supp-1',
+    name: 'Metro Wholesale Trading Co.',
+    contactPerson: 'Vikram Singh',
+    phone: '+91 98990 11223',
+    email: 'orders@metrowholesale.in',
+    category: 'FMCG & Groceries',
+    address: 'Warehouse Block C, Transport Nagar',
+    rating: 4.8,
+    reliabilityScore: 89,
+    deliveryTimeDays: 2.1,
+    priceCompetitiveness: 'Average',
+    fulfillmentRatePercent: 94.0,
+    isAIRecommended: false
   },
   {
     id: 'supp-3',
@@ -575,7 +585,12 @@ export const INITIAL_SUPPLIERS: Supplier[] = [
     email: 'hul.retailer@hul.com',
     category: 'Home & Personal Care',
     address: 'Sector 4, Wholesale Mandi',
-    rating: 4.7
+    rating: 4.7,
+    reliabilityScore: 94,
+    deliveryTimeDays: 1.5,
+    priceCompetitiveness: 'Good',
+    fulfillmentRatePercent: 97.5,
+    isAIRecommended: false
   }
 ];
 

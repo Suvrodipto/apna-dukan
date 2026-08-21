@@ -75,6 +75,11 @@ export interface Supplier {
   category: string;
   address: string;
   rating: number;
+  reliabilityScore?: number;
+  deliveryTimeDays?: number;
+  priceCompetitiveness?: 'Best' | 'Good' | 'Average';
+  fulfillmentRatePercent?: number;
+  isAIRecommended?: boolean;
 }
 
 export interface PurchaseOrderItem {
