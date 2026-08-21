@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="glass-panel sticky top-0 z-40 border-b border-amber-500/20 bg-[#121218]/95 backdrop-blur-xl shadow-2xl">
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-[#181822] via-[#14141c] to-[#0c0c10] px-4 py-1 border-b border-amber-500/20 text-[11px] text-amber-200 flex items-center justify-between">
-        <div className="flex items-center gap-2 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2 max-w-[1920px] mx-auto w-full px-4 sm:px-8 lg:px-12">
           <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
           <span className="font-extrabold text-white tracking-wide uppercase text-[10px]">APNA DUKAN ULTRA PRO:</span>
           <span className="hidden sm:inline">Worker HR & Festival Payroll • Price Predictor • Supplier AI • VIP Club</span>
@@ -133,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo & Branding */}
           <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => setActiveTab('pos')}>

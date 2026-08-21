@@ -17,7 +17,8 @@ import {
   X, 
   ChevronLeft, 
   ChevronRight, 
-  Sliders
+  Sliders,
+  Edit2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -72,6 +73,9 @@ export const WorkerManagement: React.FC = () => {
 
     if (f.length > 0 && !selectedFestival) {
       setSelectedFestival(f[0]);
+    } else if (selectedFestival) {
+      const updatedSel = f.find(item => item.id === selectedFestival.id);
+      if (updatedSel) setSelectedFestival(updatedSel);
     }
   };
 
@@ -170,6 +174,24 @@ export const WorkerManagement: React.FC = () => {
     const updated: FestivalItem = {
       ...festival,
       bonusEnabled: !festival.bonusEnabled
+    };
+    await pouchStore.saveFestival(updated);
+  };
+
+  // MANUALLY EDIT BONUS VALUE (e.g. 500, 800, 400, 1000)
+  const handleUpdateBonusValue = async (festival: FestivalItem, newValue: number) => {
+    const updated: FestivalItem = {
+      ...festival,
+      bonusValue: Math.max(0, newValue)
+    };
+    await pouchStore.saveFestival(updated);
+  };
+
+  // MANUALLY EDIT BONUS TYPE (Fixed ₹ vs Percentage %)
+  const handleUpdateBonusType = async (festival: FestivalItem, newType: 'Fixed' | 'Percentage') => {
+    const updated: FestivalItem = {
+      ...festival,
+      bonusType: newType
     };
     await pouchStore.saveFestival(updated);
   };
@@ -410,7 +432,7 @@ export const WorkerManagement: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredWorkers.map(worker => (
               <div key={worker.id} className="p-4 bg-[#14141c] rounded-2xl border border-slate-800 space-y-3">
                 <div className="flex items-start justify-between">
@@ -609,22 +631,44 @@ export const WorkerManagement: React.FC = () => {
                   {selectedFestival.description}
                 </p>
 
-                <div className="p-3 bg-[#0d0d12] rounded-xl border border-slate-800 space-y-2 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Bonus Configured:</span>
-                    <span className="font-bold text-emerald-400">
+                <div className="p-3.5 bg-[#0d0d12] rounded-xl border border-slate-800 space-y-3 text-xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400 font-bold">Bonus Configured:</span>
+                    <span className={`font-black px-2 py-0.5 rounded text-[10px] ${selectedFestival.bonusEnabled ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'}`}>
                       {selectedFestival.bonusEnabled ? 'ENABLED (ON)' : 'DISABLED (OFF)'}
                     </span>
                   </div>
-                  <div className="flex justify-between font-mono">
-                    <span className="text-slate-400">Bonus Calculation:</span>
-                    <span className="font-bold text-amber-400">
-                      {selectedFestival.bonusType === 'Percentage' ? `${selectedFestival.bonusValue}% of Salary` : `₹${selectedFestival.bonusValue} Fixed`}
-                    </span>
+
+                  <div className="space-y-1.5 pt-1 border-t border-slate-800">
+                    <label className="text-slate-400 font-bold block text-[10px] uppercase tracking-wider">Configure Festival Bonus Amount</label>
+                    <div className="flex items-center gap-2">
+                      <select
+                        value={selectedFestival.bonusType}
+                        onChange={e => handleUpdateBonusType(selectedFestival, e.target.value as any)}
+                        className="bg-[#181822] border border-slate-700 text-white rounded-lg px-2.5 py-1.5 text-xs font-bold"
+                      >
+                        <option value="Fixed">Fixed (₹)</option>
+                        <option value="Percentage">Percentage (%)</option>
+                      </select>
+
+                      <div className="relative flex-1">
+                        <span className="absolute left-2.5 top-1.5 text-amber-400 font-bold font-mono">
+                          {selectedFestival.bonusType === 'Percentage' ? '%' : '₹'}
+                        </span>
+                        <input
+                          type="number"
+                          value={selectedFestival.bonusValue}
+                          onChange={e => handleUpdateBonusValue(selectedFestival, Number(e.target.value))}
+                          placeholder="e.g. 500"
+                          className="w-full bg-[#181822] border border-slate-700 rounded-lg pl-7 pr-3 py-1.5 text-xs text-white font-mono font-bold focus:border-amber-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
+
+                  <div className="flex justify-between pt-1 text-[11px]">
                     <span className="text-slate-400">Eligible Workers:</span>
-                    <span className="font-bold text-slate-200">All Active Staff</span>
+                    <span className="font-bold text-slate-200">All Active Staff ({activeWorkers})</span>
                   </div>
                 </div>
 
@@ -632,8 +676,8 @@ export const WorkerManagement: React.FC = () => {
                   onClick={() => handleToggleBonusSetting(selectedFestival)}
                   className={`w-full py-2.5 rounded-xl font-black text-xs border transition-all ${
                     selectedFestival.bonusEnabled
-                      ? 'bg-amber-500/20 text-amber-300 border-amber-500'
-                      : 'bg-emerald-500 text-slate-950 border-emerald-400'
+                      ? 'bg-amber-500/20 text-amber-300 border-amber-500 hover:bg-amber-500/30'
+                      : 'bg-emerald-500 text-slate-950 border-emerald-400 hover:bg-emerald-400'
                   }`}
                 >
                   {selectedFestival.bonusEnabled ? 'DISABLE BONUS FOR THIS FESTIVAL' : 'ENABLE FESTIVAL BONUS NOW'}
@@ -646,33 +690,103 @@ export const WorkerManagement: React.FC = () => {
         </div>
       )}
 
-      {/* SUB-TAB VIEW 5: BONUS SETTINGS */}
+      {/* SUB-TAB VIEW 5: FESTIVAL BONUS SETTINGS */}
       {activeSubTab === 'bonus' && (
         <div className="space-y-4">
-          <div className="p-4 bg-[#14141c] rounded-2xl border border-slate-800 space-y-3">
-            <h3 className="font-extrabold text-white text-sm flex items-center gap-2">
-              <Gift className="w-4 h-4 text-amber-400" />
-              Configure Festival Bonus Rules
-            </h3>
+          <div className="p-5 bg-[#14141c] rounded-2xl border border-slate-800 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div>
+                <h3 className="font-extrabold text-white text-base flex items-center gap-2">
+                  <Gift className="w-5 h-5 text-amber-400" />
+                  Configure Festival Bonus Rules & Manual Bonus Amounts
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Set festival bonus ON/OFF, select Fixed (₹) or Percentage (%), and manually set custom bonus amounts (e.g. ₹500, ₹800, ₹1000).
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              <span className="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full font-mono text-xs font-bold">
+                {festivals.filter(f => f.bonusEnabled).length} Active Bonus Rules
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {festivals.map(fest => (
-                <div key={fest.id} className="p-3.5 bg-[#0d0d12] rounded-2xl border border-slate-800 space-y-3 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-white text-xs">{fest.emoji} {fest.name}</span>
+                <div key={fest.id} className="p-4 bg-[#0d0d12] rounded-2xl border border-slate-800 hover:border-amber-500/40 transition-all space-y-3 text-xs">
+                  {/* Festival Header & Toggle */}
+                  <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
+                    <span className="font-extrabold text-white text-xs flex items-center gap-1.5 truncate">
+                      <span>{fest.emoji || '🪔'}</span>
+                      <span className="truncate">{fest.name}</span>
+                    </span>
                     <button
                       onClick={() => handleToggleBonusSetting(fest)}
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase ${
-                        fest.bonusEnabled ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase transition-all shadow ${
+                        fest.bonusEnabled
+                          ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
+                          : 'bg-slate-800 text-slate-400 hover:text-white'
                       }`}
                     >
                       {fest.bonusEnabled ? 'ON' : 'OFF'}
                     </button>
                   </div>
 
-                  <div className="space-y-1 font-mono text-[11px] text-slate-400">
-                    <div>Type: <span className="text-slate-200">{fest.bonusType}</span></div>
-                    <div>Value: <span className="text-amber-400 font-bold">{fest.bonusType === 'Percentage' ? `${fest.bonusValue}%` : `₹${fest.bonusValue}`}</span></div>
+                  {/* Manual Bonus Type & Amount Settings */}
+                  <div className="space-y-2 pt-1">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-slate-400 font-bold">Bonus Type:</span>
+                      <select
+                        value={fest.bonusType}
+                        onChange={e => handleUpdateBonusType(fest, e.target.value as any)}
+                        className="bg-[#181822] border border-slate-700 text-amber-400 font-bold rounded-lg px-2 py-1 text-[11px] focus:outline-none"
+                      >
+                        <option value="Fixed">Fixed (₹)</option>
+                        <option value="Percentage">Percentage (%)</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center text-[11px]">
+                        <span className="text-slate-400 font-bold flex items-center gap-1">
+                          <Edit2 className="w-3 h-3 text-amber-400" />
+                          Set Bonus Value:
+                        </span>
+                        <span className="font-mono font-black text-amber-400 text-sm">
+                          {fest.bonusType === 'Percentage' ? `${fest.bonusValue}%` : `₹${fest.bonusValue.toLocaleString()}`}
+                        </span>
+                      </div>
+
+                      <div className="relative">
+                        <span className="absolute left-2.5 top-2 text-slate-400 font-bold font-mono text-xs">
+                          {fest.bonusType === 'Percentage' ? '%' : '₹'}
+                        </span>
+                        <input
+                          type="number"
+                          value={fest.bonusValue || ''}
+                          onChange={e => handleUpdateBonusValue(fest, Number(e.target.value))}
+                          placeholder="e.g. 500"
+                          className="w-full bg-[#181822] border border-slate-700 focus:border-amber-500 rounded-xl pl-7 pr-3 py-1.5 text-xs text-white font-mono font-bold focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Quick Preset Buttons (e.g. 400, 500, 800, 1000) */}
+                    <div className="flex items-center gap-1.5 pt-1">
+                      <span className="text-[9px] text-slate-500 uppercase font-bold">Quick:</span>
+                      {[400, 500, 800, 1000, 2000].map(val => (
+                        <button
+                          key={val}
+                          onClick={() => handleUpdateBonusValue(fest, val)}
+                          className={`px-1.5 py-0.5 rounded text-[9px] font-mono font-bold transition-all border ${
+                            fest.bonusValue === val
+                              ? 'bg-amber-500 text-slate-950 border-amber-400 font-black'
+                              : 'bg-[#181822] text-slate-400 border-slate-800 hover:text-white'
+                          }`}
+                        >
+                          ₹{val}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
