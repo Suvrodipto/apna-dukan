@@ -19,6 +19,8 @@ import { LoginPage } from './components/auth/LoginPage';
 import { AIPitchSimulationModal } from './components/pos/AIPitchSimulationModal';
 import { Bot, PlayCircle, Truck } from 'lucide-react';
 
+import { AcquiredAnomalyPage } from './components/acquired/AcquiredAnomalyPage';
+
 export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     return localStorage.getItem('apna_dukan_session') === 'active';
@@ -112,6 +114,7 @@ export function App() {
         {activeTab === 'price-predictor' && <SmartPricePredictor />}
         {activeTab === 'ocr' && <BillOCRScanner onLoadIntoPOS={() => setActiveTab('pos')} />}
         {activeTab === 'supplier' && <SupplierOrders role={role} onNavigateTab={(t) => setActiveTab(t)} />}
+        {activeTab === 'acquired-anomaly' && <AcquiredAnomalyPage />}
         {activeTab === 'analytics' && <SalesAnalytics onNavigateTab={(t) => setActiveTab(t)} />}
         {activeTab === 'marketplace' && <TradableAssetStudio />}
       </main>
