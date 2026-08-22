@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import type { UserRole } from '../../types';
 import type { Language } from '../../services/i18n';
 import { TRANSLATIONS } from '../../services/i18n';
@@ -18,7 +18,6 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  Bot,
   LogOut,
   PlayCircle,
   TrendingUp,
@@ -26,7 +25,9 @@ import {
   Wifi,
   WifiOff,
   ShieldAlert,
-  Navigation
+  Navigation,
+  Menu,
+  X
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -61,14 +62,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   setSoundEnabled,
   networkStatus,
   onOpenSyncModal,
-  onOpenChatbot,
-  onOpenSupplierChatbot,
   onOpenPitchModal,
   onLogout
 }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
-  const navContainerRef = useRef<HTMLDivElement>(null);
 
   const t = TRANSLATIONS[lang];
 
@@ -86,245 +86,259 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'marketplace', label: t.assetMarketplace, icon: Layers, roles: ['owner', 'cashier', 'supplier'], badge: '11 Assets' }
   ];
 
-  const scrollNav = (direction: 'left' | 'right') => {
-    if (navContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -200 : 200;
-      navContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+  const visibleNavItems = navItems.filter(item => item.roles.includes(role));
+
+  const roleLabels: Record<UserRole, { title: string; color: string }> = {
+    owner: { title: 'Dukan Owner', color: 'from-amber-500 to-yellow-500 text-slate-950' },
+    cashier: { title: 'Billing Cashier', color: 'from-blue-500 to-indigo-500 text-white' },
+    supplier: { title: 'Vendor / Supplier', color: 'from-purple-500 to-emerald-500 text-white' }
   };
 
   return (
-    <header className="glass-panel sticky top-0 z-40 border-b border-amber-500/20 bg-[#121218]/95 backdrop-blur-xl shadow-2xl">
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-[#181822] via-[#14141c] to-[#0c0c10] px-4 py-1 border-b border-amber-500/20 text-[11px] text-amber-200 flex items-center justify-between">
-        <div className="flex items-center gap-2 max-w-[1920px] mx-auto w-full px-4 sm:px-8 lg:px-12">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
-          <span className="font-extrabold text-white tracking-wide uppercase text-[10px]">APNA DUKAN ULTRA PRO:</span>
-          <span className="hidden sm:inline">Worker HR & Festival Payroll • Price Predictor • Supplier AI • VIP Club</span>
-          
-          <div className="ml-auto flex items-center gap-2">
-            {/* Show AI in Action Pitch Button */}
-            {onOpenPitchModal && (
-              <button
-                onClick={onOpenPitchModal}
-                className="flex items-center gap-1.5 px-3 py-0.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 rounded-full font-black text-[10px] shadow-lg shadow-amber-500/20 hover:scale-105 transition-transform cursor-pointer border border-amber-300 animate-pulse"
-                title="Launch Judge Presentation AI Storytelling Simulation"
-              >
-                <PlayCircle className="w-3.5 h-3.5 fill-current" />
-                <span>✨ SHOW AI IN ACTION</span>
-              </button>
-            )}
+    <>
+      {/* 📱 MOBILE TOP HEADER BAR (Mobile Only) */}
+      <div className="lg:hidden sticky top-0 z-50 bg-[#0d0d14]/95 border-b border-amber-500/20 backdrop-blur-xl px-4 py-3 flex items-center justify-between shadow-2xl">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className="p-2 bg-slate-800 text-amber-400 rounded-xl border border-slate-700 active:scale-95"
+            aria-label="Toggle Navigation Drawer"
+          >
+            {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
 
-            {/* Vendor-Only Supplier AI Assistant Trigger */}
-            {role === 'supplier' && onOpenSupplierChatbot && (
-              <button
-                onClick={onOpenSupplierChatbot}
-                className="flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500 text-slate-950 border border-amber-300 rounded-full font-black text-[10px] shadow cursor-pointer animate-pulse"
-              >
-                <Truck className="w-3 h-3 fill-current" />
-                <span>SUPPLIER AI ADVISOR</span>
-              </button>
-            )}
-
-            <button
-              onClick={onOpenChatbot}
-              className="flex items-center gap-1.5 px-2.5 py-0.5 bg-[#181824] hover:bg-[#20202c] border border-amber-500/30 text-amber-300 rounded-full font-bold text-[10px] shadow-sm cursor-pointer"
-            >
-              <Bot className="w-3 h-3 text-amber-400" />
-              <span>ASK AI</span>
-            </button>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 flex items-center justify-center shadow-lg shadow-amber-500/20">
+              <Store className="w-5 h-5 text-slate-950" />
+            </div>
+            <span className="font-black text-white text-base tracking-tight">APNA DUKAN</span>
           </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {onOpenPitchModal && (
+            <button
+              onClick={onOpenPitchModal}
+              className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 rounded-lg font-black text-[10px] shadow"
+            >
+              <PlayCircle className="w-3.5 h-3.5" />
+              <span>AI</span>
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-16 gap-4">
-          {/* Logo & Branding */}
-          <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => setActiveTab('pos')}>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 animate-glow">
-              <Store className="w-6 h-6 text-slate-950 font-black" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg text-white tracking-tight">APNA<span className="text-amber-400"> DUKAN</span></span>
-                <span className="px-2 py-0.5 text-[10px] font-black bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full">v5.0 HR Enterprise</span>
+      {/* 📱 MOBILE DRAWER BACKDROP */}
+      {isMobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
+      {/* 💻 LEFT SLIDING SIDEBAR NAVIGATION BAR */}
+      <aside
+        className={`fixed lg:sticky top-0 left-0 z-50 h-screen bg-[#0d0d14]/95 border-r border-amber-500/20 backdrop-blur-2xl flex flex-col justify-between transition-all duration-300 ease-in-out shadow-2xl ${
+          isCollapsed ? 'w-20' : 'w-64'
+        } ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+      >
+        {/* Top Section: Brand & Sidebar Collapse Toggle */}
+        <div className="p-4 border-b border-slate-800/80 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 overflow-hidden">
+              <div className="w-10 h-10 shrink-0 rounded-2xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30 border border-amber-300/40">
+                <Store className="w-6 h-6 text-slate-950" />
               </div>
-              <p className="text-[11px] text-slate-400">{t.subtitle}</p>
+
+              {!isCollapsed && (
+                <div className="min-w-0">
+                  <h1 className="font-black text-white text-base tracking-tight leading-none flex items-center gap-1.5 truncate">
+                    APNA DUKAN
+                  </h1>
+                  <span className="text-[10px] text-amber-400 font-mono font-bold tracking-wider uppercase">v5.0 Enterprise</span>
+                </div>
+              )}
             </div>
+
+            {/* Sidebar Collapse Toggle Button */}
+            <button
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="hidden lg:flex p-1.5 bg-[#181824] hover:bg-slate-800 text-slate-400 hover:text-amber-400 border border-slate-800 rounded-xl transition-all shadow cursor-pointer"
+              title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            >
+              {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            </button>
           </div>
 
-          {/* SLIDING NAVIGATION BAR */}
-          <div className="relative flex-1 max-w-3xl overflow-hidden hidden md:flex items-center">
-            <button
-              onClick={() => scrollNav('left')}
-              className="p-1 rounded-lg bg-[#181822] text-slate-400 hover:text-white border border-slate-800 z-10 mr-1 shadow"
-              title="Scroll Left"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
+          {/* Network Status Badge */}
+          <button
+            onClick={onOpenSyncModal}
+            className={`w-full p-2 rounded-xl border flex items-center gap-2 text-xs font-mono transition-all ${
+              networkStatus.networkMode === 'Online'
+                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20'
+                : networkStatus.networkMode === 'Low-Bandwidth (2G)'
+                ? 'bg-amber-500/10 border-amber-500/30 text-amber-400 hover:bg-amber-500/20'
+                : 'bg-rose-500/10 border-rose-500/30 text-rose-400 hover:bg-rose-500/20'
+            }`}
+          >
+            {networkStatus.isOnline ? <Wifi className="w-4 h-4 shrink-0" /> : <WifiOff className="w-4 h-4 shrink-0" />}
+            {!isCollapsed && (
+              <div className="flex-1 flex items-center justify-between overflow-hidden text-[11px]">
+                <span className="font-bold truncate">{networkStatus.networkMode}</span>
+                {networkStatus.pendingCount > 0 && (
+                  <span className="px-1.5 py-0.2 bg-amber-500/30 text-amber-300 rounded font-black text-[9px]">
+                    {networkStatus.pendingCount}
+                  </span>
+                )}
+              </div>
+            )}
+          </button>
+        </div>
 
-            <div
-              ref={navContainerRef}
-              className="flex items-center space-x-1.5 overflow-x-auto sliding-nav-container py-1 scroll-smooth no-scrollbar"
+        {/* Middle Navigation Links */}
+        <div className="flex-1 overflow-y-auto p-3 space-y-1 custom-scrollbar">
+          {visibleNavItems.map(item => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setIsMobileOpen(false);
+                }}
+                className={`w-full group relative flex items-center gap-3 px-3 py-2.5 rounded-2xl font-medium text-xs transition-all duration-200 cursor-pointer ${
+                  isActive
+                    ? 'bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/5 text-amber-300 font-extrabold border border-amber-500/40 shadow-lg shadow-amber-500/10'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
+                }`}
+                title={isCollapsed ? item.label : undefined}
+              >
+                <div className={`p-1.5 rounded-xl shrink-0 transition-colors ${
+                  isActive ? 'bg-amber-500/20 text-amber-400' : 'group-hover:text-amber-400'
+                }`}>
+                  <Icon className="w-4 h-4" />
+                </div>
+
+                {!isCollapsed && (
+                  <div className="flex-1 flex items-center justify-between overflow-hidden">
+                    <span className="truncate text-xs tracking-wide">{item.label}</span>
+                    {item.badge && (
+                      <span className="px-1.5 py-0.5 text-[9px] font-black bg-slate-800 text-slate-300 rounded-md border border-slate-700 uppercase shrink-0">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Bottom Panel: AI Pitch, Role, Language, Logout */}
+        <div className="p-3 border-t border-slate-800/80 space-y-3 bg-[#0a0a0f]">
+          {/* SHOW AI IN ACTION Pitch Simulation Button */}
+          {onOpenPitchModal && (
+            <button
+              onClick={onOpenPitchModal}
+              className="w-full py-2 px-3 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 border border-amber-300 animate-pulse cursor-pointer"
             >
-              {navItems
-                .filter(item => item.roles.includes(role))
-                .map(item => {
-                  const Icon = item.icon;
-                  const isActive = activeTab === item.id;
-                  return (
+              <PlayCircle className="w-4 h-4 fill-current shrink-0" />
+              {!isCollapsed && <span>SHOW AI IN ACTION</span>}
+            </button>
+          )}
+
+          {/* Role Switcher */}
+          {!isCollapsed ? (
+            <div className="relative">
+              <button
+                onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
+                className="w-full p-2 bg-[#14141e] border border-slate-800 hover:border-slate-700 rounded-xl flex items-center justify-between text-xs text-slate-300 transition-all"
+              >
+                <div className="flex items-center gap-2 overflow-hidden">
+                  <div className={`px-2 py-0.5 rounded-lg text-[10px] font-black uppercase ${roleLabels[role].color}`}>
+                    {role}
+                  </div>
+                  <span className="truncate font-bold text-slate-200 text-xs">{roleLabels[role].title}</span>
+                </div>
+                <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+              </button>
+
+              {roleDropdownOpen && (
+                <div className="absolute bottom-full mb-2 left-0 right-0 bg-[#181824] border border-slate-700 rounded-xl shadow-2xl p-1 z-50 space-y-1">
+                  {(['owner', 'cashier', 'supplier'] as UserRole[]).map(r => (
                     <button
-                      key={item.id}
-                      onClick={() => setActiveTab(item.id)}
-                      className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 border ${
-                        isActive
-                          ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 border-amber-300 font-extrabold shadow-lg shadow-amber-500/25 scale-105'
-                          : 'bg-[#181822] border-slate-800 text-slate-300 hover:bg-[#20202c] hover:text-white hover:border-slate-700'
+                      key={r}
+                      onClick={() => {
+                        setRole(r);
+                        setRoleDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 text-xs rounded-lg flex items-center justify-between ${
+                        role === r ? 'bg-amber-500/20 text-amber-300 font-bold' : 'text-slate-300 hover:bg-slate-800'
                       }`}
                     >
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-slate-950' : 'text-amber-400'}`} />
-                      <span>{item.label}</span>
-                      {item.badge && (
-                        <span className={`px-1.5 py-0.2 text-[8px] font-black rounded uppercase ${
-                          isActive
-                            ? 'bg-slate-950 text-amber-300'
-                            : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                        }`}>
-                          {item.badge}
-                        </span>
-                      )}
+                      <span className="capitalize font-mono">{r} Mode</span>
+                      {role === r && <Sparkles className="w-3 h-3 text-amber-400" />}
                     </button>
-                  );
-                })}
+                  ))}
+                </div>
+              )}
             </div>
+          ) : (
+            <div className="flex justify-center">
+              <button
+                onClick={() => setRole(role === 'owner' ? 'cashier' : role === 'cashier' ? 'supplier' : 'owner')}
+                className="p-2 bg-slate-800 text-amber-400 rounded-xl border border-slate-700"
+                title={`Role: ${role}`}
+              >
+                <Sparkles className="w-4 h-4" />
+              </button>
+            </div>
+          )}
 
-            <button
-              onClick={() => scrollNav('right')}
-              className="p-1 rounded-lg bg-[#181822] text-slate-400 hover:text-white border border-slate-800 z-10 ml-1 shadow"
-              title="Scroll Right"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Right Controls */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Audio Soundbox Toggle */}
+          {/* Controls Bar: Sound, Language, Logout */}
+          <div className="flex items-center justify-between gap-1 pt-1 border-t border-slate-800/60">
+            {/* Sound FX Toggle */}
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className={`p-2 rounded-xl border text-xs font-bold transition-all ${
-                soundEnabled
-                  ? 'bg-amber-500/10 text-amber-400 border-amber-500/30 shadow-inner'
-                  : 'bg-[#181822] text-slate-500 border-slate-800'
-              }`}
-              title="Toggle Audio Soundbox Alerts"
+              className="p-2 bg-slate-800/60 hover:bg-slate-800 text-slate-400 hover:text-amber-400 rounded-xl border border-slate-800 text-xs transition-colors"
+              title={soundEnabled ? "Sound On" : "Mute Sound"}
             >
-              {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-            </button>
-
-            {/* Offline Sync Status Badge */}
-            <button
-              onClick={onOpenSyncModal}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
-                !networkStatus.isOnline
-                  ? 'bg-red-500/10 text-red-400 border-red-500/30 animate-pulse'
-                  : networkStatus.networkMode === 'Low-Bandwidth (2G)'
-                  ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                  : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-              }`}
-              title="Manage Offline Sync"
-            >
-              {!networkStatus.isOnline ? (
-                <>
-                  <WifiOff className="w-3.5 h-3.5 text-red-400" />
-                  <span className="hidden sm:inline">Offline</span>
-                </>
-              ) : (
-                <>
-                  <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="hidden sm:inline">{networkStatus.networkMode}</span>
-                </>
-              )}
-
-              {networkStatus.pendingCount > 0 && (
-                <span className="px-1.5 py-0.5 text-[9px] font-black bg-amber-400 text-slate-950 rounded-full">
-                  {networkStatus.pendingCount}
-                </span>
-              )}
+              {soundEnabled ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
             </button>
 
             {/* Language Switcher */}
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#181822] hover:bg-[#20202c] text-slate-200 border border-slate-800 rounded-xl text-xs font-bold transition-all"
+                className="p-2 bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-amber-400 rounded-xl border border-slate-800 text-xs font-mono flex items-center gap-1"
+                title="Change Language"
               >
-                <Globe className="w-3.5 h-3.5 text-amber-400" />
-                <span className="uppercase">{lang}</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
+                <Globe className="w-4 h-4 text-amber-400" />
+                {!isCollapsed && <span className="uppercase text-[10px] font-bold">{lang}</span>}
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-[#161620] border border-slate-800 rounded-xl shadow-2xl py-1.5 z-50 text-xs">
-                  <button
-                    onClick={() => { setLang('en'); setLangDropdownOpen(false); }}
-                    className={`w-full text-left px-3 py-1.5 hover:bg-[#20202c] ${lang === 'en' ? 'text-amber-400 font-bold' : 'text-slate-300'}`}
-                  >
-                    English
-                  </button>
-                  <button
-                    onClick={() => { setLang('hi'); setLangDropdownOpen(false); }}
-                    className={`w-full text-left px-3 py-1.5 hover:bg-[#20202c] ${lang === 'hi' ? 'text-amber-400 font-bold' : 'text-slate-300'}`}
-                  >
-                    हिन्दी 🇮🇳 (Hindi)
-                  </button>
-                  <button
-                    onClick={() => { setLang('hinglish'); setLangDropdownOpen(false); }}
-                    className={`w-full text-left px-3 py-1.5 hover:bg-[#20202c] ${lang === 'hinglish' ? 'text-amber-400 font-bold' : 'text-slate-300'}`}
-                  >
-                    Hinglish
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Role Switcher */}
-            <div className="relative">
-              <button
-                onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#181822] hover:bg-[#20202c] text-slate-200 border border-slate-800 rounded-xl text-xs font-semibold transition-all"
-              >
-                <Store className="w-4 h-4 text-amber-400" />
-                <span className="font-bold text-white capitalize text-[11px] hidden sm:inline">{role}</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
-              </button>
-
-              {roleDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-[#161620] border border-slate-800 rounded-xl shadow-2xl py-2 z-50">
-                  <div className="px-3 py-1.5 border-b border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                    Select User Role
-                  </div>
-                  <button
-                    onClick={() => { setRole('owner'); setRoleDropdownOpen(false); }}
-                    className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#20202c] ${role === 'owner' ? 'text-amber-400 font-semibold bg-[#20202c]' : 'text-slate-300'}`}
-                  >
-                    <span>Shop Owner (Admin)</span>
-                    {role === 'owner' && <span className="w-2 h-2 rounded-full bg-amber-500" />}
-                  </button>
-                  <button
-                    onClick={() => { setRole('cashier'); setRoleDropdownOpen(false); }}
-                    className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#20202c] ${role === 'cashier' ? 'text-amber-400 font-semibold bg-[#20202c]' : 'text-slate-300'}`}
-                  >
-                    <span>Cashier / POS Staff</span>
-                    {role === 'cashier' && <span className="w-2 h-2 rounded-full bg-amber-500" />}
-                  </button>
-                  <button
-                    onClick={() => { setRole('supplier'); setRoleDropdownOpen(false); }}
-                    className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#20202c] ${role === 'supplier' ? 'text-amber-400 font-semibold bg-[#20202c]' : 'text-slate-300'}`}
-                  >
-                    <span>Supplier / Wholesale Vendor</span>
-                    {role === 'supplier' && <span className="w-2 h-2 rounded-full bg-amber-500" />}
-                  </button>
+                <div className="absolute bottom-full mb-2 right-0 w-32 bg-[#181824] border border-slate-700 rounded-xl shadow-2xl p-1 z-50 space-y-1">
+                  {[
+                    { code: 'en', name: 'English' },
+                    { code: 'hi', name: 'हिंदी' },
+                    { code: 'od', name: 'ଓଡ଼ିଆ' }
+                  ].map(l => (
+                    <button
+                      key={l.code}
+                      onClick={() => {
+                        setLang(l.code as Language);
+                        setLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-2.5 py-1.5 text-xs rounded-lg ${
+                        lang === l.code ? 'bg-amber-500/20 text-amber-300 font-bold' : 'text-slate-300 hover:bg-slate-800'
+                      }`}
+                    >
+                      {l.name}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -333,39 +347,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             {onLogout && (
               <button
                 onClick={onLogout}
-                className="p-2 rounded-xl bg-[#181822] hover:bg-red-500/20 text-slate-400 hover:text-red-400 border border-slate-800 hover:border-red-500/30 text-xs font-bold transition-all"
-                title="Logout of APNA DUKAN"
+                className="p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-xl border border-rose-500/30 text-xs transition-colors"
+                title="Logout Session"
               >
                 <LogOut className="w-4 h-4" />
               </button>
             )}
           </div>
         </div>
-
-        {/* Mobile Navigation Bar */}
-        <div className="flex md:hidden items-center py-2 border-t border-slate-800/80 overflow-x-auto gap-1.5 no-scrollbar">
-          {navItems
-            .filter(item => item.roles.includes(role))
-            .map(item => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-1.5 py-1.5 px-3 text-xs font-bold rounded-xl whitespace-nowrap transition-all border ${
-                    isActive
-                      ? 'bg-amber-500 text-slate-950 border-amber-400 shadow'
-                      : 'bg-[#181822] border-slate-800 text-slate-300'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-        </div>
-      </div>
-    </header>
+      </aside>
+    </>
   );
 };

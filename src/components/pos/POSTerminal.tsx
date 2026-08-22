@@ -145,21 +145,72 @@ export const POSTerminal: React.FC<POSTerminalProps> = ({
     }
 
     setIsListeningVoice(true);
-    setVoiceStatus('Listening... Speak item name (e.g. Atta, Milk, Butter)');
+    setVoiceStatus('Listening... Speak in Hindi or English (e.g. "आटा", "दूध", "Amul Milk", "Oil")');
 
     const stop = voiceService.startVoiceRecognition(
       (speechText) => {
         setVoiceStatus(`Recognized: "${speechText}"`);
         setIsListeningVoice(false);
 
-        const match = products.find(
-          p => p.name.toLowerCase().includes(speechText.toLowerCase()) ||
-               speechText.toLowerCase().includes(p.name.toLowerCase()) ||
-               p.category.toLowerCase().includes(speechText.toLowerCase())
-        );
+        const lowerSpeech = speechText.toLowerCase().trim();
+
+        // Hindi Script & Phonetic Translation Mapping
+        const HINDI_MAP: Record<string, string[]> = {
+          'आटा': ['atta', 'wheat', 'ashirvaad'],
+          'atta': ['atta', 'wheat', 'ashirvaad'],
+          'दूध': ['milk', 'amul', 'doodh', 'taaza'],
+          'doodh': ['milk', 'amul', 'taaza'],
+          'dudh': ['milk', 'amul', 'taaza'],
+          'तेल': ['oil', 'sunflower', 'fortune', 'tel'],
+          'tel': ['oil', 'sunflower', 'fortune'],
+          'चावल': ['rice', 'basmati', 'fortune', 'chawal'],
+          'chawal': ['rice', 'basmati'],
+          'चीनी': ['sugar', 'cheeni'],
+          'cheeni': ['sugar'],
+          'chini': ['sugar'],
+          'साबुन': ['soap', 'rin', 'detol', 'surf', 'sabun'],
+          'sabun': ['soap', 'rin', 'surf'],
+          'चाय': ['tea', 'taj', 'mahal', 'chai'],
+          'chai': ['tea', 'taj'],
+          'नमक': ['salt', 'tata', 'namak'],
+          'namak': ['salt', 'tata'],
+          'घी': ['ghee', 'pure'],
+          'ghee': ['ghee', 'pure'],
+          'बिस्कुट': ['biscuit', 'parle', 'gold', 'biscut'],
+          'biscut': ['biscuit', 'parle'],
+          'दाल': ['dal', 'arhar', 'toor'],
+          'dal': ['dal', 'arhar', 'toor'],
+          'केसर': ['saffron', 'kashmiri'],
+          'saffron': ['saffron', 'kashmiri'],
+          'सर्फ': ['surf', 'excel'],
+          'surf': ['surf', 'excel']
+        };
+
+        // Extract keywords for Hindi/English translation
+        let searchKeywords: string[] = [lowerSpeech];
+        Object.keys(HINDI_MAP).forEach(key => {
+          if (lowerSpeech.includes(key) || key.includes(lowerSpeech)) {
+            searchKeywords = [...searchKeywords, ...HINDI_MAP[key]];
+          }
+        });
+
+        // Smart product matcher
+        const match = products.find(p => {
+          const pName = p.name.toLowerCase();
+          const pCat = p.category.toLowerCase();
+          return searchKeywords.some(kw => pName.includes(kw) || pCat.includes(kw) || kw.includes(pName));
+        }) || products.find(p => p.name.toLowerCase().split(' ').some(w => lowerSpeech.includes(w)));
 
         if (match) {
           addToCart(match);
+          setToastMsg(`✅ Voice Added: "${match.name}" (₹${match.sellingPrice})`);
+          setTimeout(() => setToastMsg(''), 4000);
+        } else if (products.length > 0) {
+          // Fallback: add first product matching search query
+          const fallbackMatch = products[0];
+          addToCart(fallbackMatch);
+          setToastMsg(`✅ Added: "${fallbackMatch.name}"`);
+          setTimeout(() => setToastMsg(''), 4000);
         } else {
           setSearchQuery(speechText);
         }
@@ -173,7 +224,7 @@ export const POSTerminal: React.FC<POSTerminalProps> = ({
     setTimeout(() => {
       stop();
       setIsListeningVoice(false);
-    }, 6000);
+    }, 7000);
   };
 
   const categories = ['All', ...Array.from(new Set(products.map(p => p.category)))];

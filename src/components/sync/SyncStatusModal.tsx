@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { pouchStore } from '../../db/pouchStore';
-import { Wifi, WifiOff, RefreshCw, Database, CheckCircle2, Copy, X, Layers } from 'lucide-react';
+import { Wifi, WifiOff, RefreshCw, Database, CheckCircle2, X } from 'lucide-react';
 
 interface SyncStatusModalProps {
   isOpen: boolean;
@@ -18,7 +18,6 @@ export const SyncStatusModal: React.FC<SyncStatusModalProps> = ({
   onClose,
   networkStatus
 }) => {
-  const [copiedCode, setCopiedCode] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
 
   if (!isOpen) return null;
@@ -31,24 +30,6 @@ export const SyncStatusModal: React.FC<SyncStatusModalProps> = ({
     setIsSyncing(true);
     await pouchStore.syncPendingMutations();
     setTimeout(() => setIsSyncing(false), 800);
-  };
-
-  const codeSnippet = `// PouchDB / RxDB Low-Connectivity Sync Layer Adapter
-import { PouchStoreManager } from '@dukaan/sync-engine';
-
-const syncManager = PouchStoreManager.getInstance();
-syncManager.setNetworkMode('${networkStatus.networkMode}');
-
-// Listen to offline mutation queue
-syncManager.subscribe(() => {
-  const status = syncManager.getNetworkStatus();
-  console.log('Queued Mutations:', status.pendingCount);
-});`;
-
-  const copyCode = () => {
-    navigator.clipboard.writeText(codeSnippet);
-    setCopiedCode(true);
-    setTimeout(() => setCopiedCode(false), 2000);
   };
 
   return (
@@ -181,25 +162,6 @@ syncManager.subscribe(() => {
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-blue-400" />
-                Cross-Domain Asset Export Snippet (Healthcare, Disaster, Transport)
-              </span>
-              <button
-                onClick={copyCode}
-                className="flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 font-medium"
-              >
-                <Copy className="w-3 h-3" />
-                {copiedCode ? 'Copied!' : 'Copy Code'}
-              </button>
-            </div>
-            <pre className="font-mono text-[11px] text-slate-300 bg-slate-900 p-3 rounded-lg overflow-x-auto border border-slate-800">
-              {codeSnippet}
-            </pre>
           </div>
         </div>
       </div>

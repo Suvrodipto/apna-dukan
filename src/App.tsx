@@ -87,8 +87,8 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0e] text-slate-100 flex flex-col font-sans relative selection:bg-amber-500 selection:text-slate-950">
-      {/* Top Sliding Navbar */}
+    <div className="min-h-screen bg-[#0a0a0e] text-slate-100 flex flex-col lg:flex-row font-sans relative selection:bg-amber-500 selection:text-slate-950 overflow-x-hidden">
+      {/* Left Sliding Sidebar Navigation */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -106,20 +106,22 @@ export function App() {
         onLogout={handleLogout}
       />
 
-      {/* Main Content Viewport */}
-      <main className="flex-1 max-w-[1920px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-5">
-        {activeTab === 'pos' && <POSTerminal lang={lang} soundEnabled={soundEnabled} />}
-        {activeTab === 'khata' && <KhataLedger />}
-        {activeTab === 'inventory' && <InventoryCatalogue />}
-        {activeTab === 'workers' && <WorkerManagement />}
-        {activeTab === 'price-predictor' && <SmartPricePredictor />}
-        {activeTab === 'ocr' && <BillOCRScanner onLoadIntoPOS={() => setActiveTab('pos')} />}
-        {activeTab === 'supplier' && <SupplierOrders role={role} onNavigateTab={(t) => setActiveTab(t)} />}
-        {activeTab === 'acquired-anomaly' && <AcquiredAnomalyPage />}
-        {activeTab === 'acquired-route' && <AcquiredAccessRoutePage />}
-        {activeTab === 'analytics' && <SalesAnalytics onNavigateTab={(t) => setActiveTab(t)} />}
-        {activeTab === 'marketplace' && <TradableAssetStudio />}
-      </main>
+      {/* Main Content Workspace Viewport */}
+      <div className="flex-1 flex flex-col min-w-0 w-full overflow-y-auto">
+        <main className="flex-1 max-w-[1920px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-5">
+          {activeTab === 'pos' && <POSTerminal lang={lang} soundEnabled={soundEnabled} />}
+          {activeTab === 'khata' && <KhataLedger />}
+          {activeTab === 'inventory' && <InventoryCatalogue />}
+          {activeTab === 'workers' && <WorkerManagement />}
+          {activeTab === 'price-predictor' && <SmartPricePredictor />}
+          {activeTab === 'ocr' && <BillOCRScanner onLoadIntoPOS={() => setActiveTab('pos')} />}
+          {activeTab === 'supplier' && <SupplierOrders role={role} onNavigateTab={(t) => setActiveTab(t)} />}
+          {activeTab === 'acquired-anomaly' && <AcquiredAnomalyPage />}
+          {activeTab === 'acquired-route' && <AcquiredAccessRoutePage />}
+          {activeTab === 'analytics' && <SalesAnalytics onNavigateTab={(t) => setActiveTab(t)} />}
+          {activeTab === 'marketplace' && <TradableAssetStudio />}
+        </main>
+      </div>
 
       {/* FLOATING BUTTONS */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col sm:flex-row items-end sm:items-center gap-2">

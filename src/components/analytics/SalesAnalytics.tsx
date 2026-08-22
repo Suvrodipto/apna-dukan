@@ -258,57 +258,63 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ onNavigateTab })
         </div>
       </div>
 
-      {/* Main KPI Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
-            <span>Total Sales Revenue</span>
-            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
-              <DollarSign className="w-4 h-4" />
+      {/* Main KPI Summary Cards - Moving Marquee Carousel */}
+      <Carousel
+        items={[
+          <div key="kpi-1" className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2 bg-[#12121c]">
+            <div className="flex items-center justify-between text-slate-400 text-xs">
+              <span className="font-bold text-slate-200">Total Sales Revenue</span>
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+                <DollarSign className="w-4 h-4" />
+              </div>
             </div>
-          </div>
-          <div className="text-2xl font-black text-white font-mono">₹{totalRevenue.toLocaleString()}</div>
-          <div className="text-[11px] text-emerald-400 flex items-center gap-1">
-            <ArrowUpRight className="w-3.5 h-3.5" />
-            <span>+18.4% vs last week</span>
-          </div>
-        </div>
+            <div className="text-2xl font-black text-white font-mono">₹{totalRevenue.toLocaleString()}</div>
+            <div className="text-[11px] text-emerald-400 flex items-center gap-1">
+              <ArrowUpRight className="w-3.5 h-3.5" />
+              <span>+18.4% vs last week</span>
+            </div>
+          </div>,
 
-        <div className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
-            <span>Gross Profit Margin</span>
-            <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
-              <TrendingUp className="w-4 h-4" />
+          <div key="kpi-2" className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2 bg-[#12121c]">
+            <div className="flex items-center justify-between text-slate-400 text-xs">
+              <span className="font-bold text-slate-200">Gross Profit Margin</span>
+              <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
+                <TrendingUp className="w-4 h-4" />
+              </div>
             </div>
-          </div>
-          <div className="text-2xl font-black text-white font-mono">₹{grossProfit.toLocaleString()}</div>
-          <div className="text-[11px] text-blue-400 font-mono font-bold">
-            {profitMargin}% Net Margin
-          </div>
-        </div>
+            <div className="text-2xl font-black text-white font-mono">₹{grossProfit.toLocaleString()}</div>
+            <div className="text-[11px] text-blue-400 font-mono font-bold">
+              {profitMargin}% Net Margin
+            </div>
+          </div>,
 
-        <div className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
-            <span>Outstanding Khata Udhaar</span>
-            <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400">
-              <CreditCard className="w-4 h-4" />
+          <div key="kpi-3" className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2 bg-[#12121c]">
+            <div className="flex items-center justify-between text-slate-400 text-xs">
+              <span className="font-bold text-slate-200">Outstanding Khata Udhaar</span>
+              <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400">
+                <CreditCard className="w-4 h-4" />
+              </div>
             </div>
-          </div>
-          <div className="text-2xl font-black text-amber-400 font-mono">₹{totalUdhaar.toLocaleString()}</div>
-          <div className="text-[11px] text-slate-400">Across {customers.length} credit accounts</div>
-        </div>
+            <div className="text-2xl font-black text-amber-400 font-mono">₹{totalUdhaar.toLocaleString()}</div>
+            <div className="text-[11px] text-slate-400">Across {customers.length} credit accounts</div>
+          </div>,
 
-        <div className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
-            <span>Reorder Needed Items</span>
-            <div className="p-2 rounded-lg bg-red-500/10 text-red-400">
-              <AlertTriangle className="w-4 h-4" />
+          <div key="kpi-4" className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2 bg-[#12121c]">
+            <div className="flex items-center justify-between text-slate-400 text-xs">
+              <span className="font-bold text-slate-200">Reorder Needed Items</span>
+              <div className="p-2 rounded-lg bg-red-500/10 text-red-400">
+                <AlertTriangle className="w-4 h-4" />
+              </div>
             </div>
+            <div className="text-2xl font-black text-red-400 font-mono">{lowStockCount} Products</div>
+            <div className="text-[11px] text-slate-400">Auto PO ready in Supplier tab</div>
           </div>
-          <div className="text-2xl font-black text-red-400 font-mono">{lowStockCount} Products</div>
-          <div className="text-[11px] text-slate-400">Auto PO ready in Supplier tab</div>
-        </div>
-      </div>
+        ]}
+        title="📊 Financial KPI Metric Stream"
+        badge="Live Metrics Ticker"
+        subtitle="Continuous left-to-right moving KPI metrics carousel"
+        speedSeconds={20}
+      />
 
       {/* 🚀 MODULE 1: SMART BUSINESS INSIGHTS CAROUSEL */}
       <Carousel
