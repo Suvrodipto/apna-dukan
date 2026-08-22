@@ -11,6 +11,26 @@ For **HACQUIRE 2026**, the system is structured into **9 isolated, standalone tr
 
 ---
 
+## 🤝 HACQUIRE 2026 - Official Pitch Deck Slides (Trade Slide & Integration Defense)
+
+### 📊 Slide 2 — What We Traded (The Trade Slide)
+- **Acquired Asset**: **Plug-and-Play Anomaly Detection Engine**
+- **Seller Team**: **Voltiq** *(Ashmit-Roy)*
+- **Purchase Price**: **₹4.00 Cr FED Coins**
+- **Repository Link**: [`Ashmit-Roy/Voltiq/tree/main/anomaly-detection-engine`](https://github.com/Ashmit-Roy/Voltiq/tree/main/anomaly-detection-engine)
+- **Deal Register Compliance**: Recorded at the SEBI Registration Desk (Buyer: APNA DUKAN, Seller: Voltiq, Agreed Price: ₹4.00 Cr).
+
+### ⚡ Slide 3 — What We Integrated (Technical Integration & Value Addition)
+- **Integration Layer**: Embedded in [`src/components/analytics/SalesAnalytics.tsx`](https://github.com/Suvrodipto/apna-dukan/tree/main/src/components/analytics/SalesAnalytics.tsx) and [`src/acquired_modules/anomaly-detection-engine`](https://github.com/Suvrodipto/apna-dukan/tree/main/src/acquired_modules/anomaly-detection-engine).
+- **Core Algorithm**: Calculates statistical baseline mean ($\mu$), standard deviation ($\sigma$), and Z-score dispersion ($Z = \frac{x - \mu}{\sigma}$).
+- **Value Addition to APNA DUKAN**:
+  1. Real-time POS checkout stream monitoring.
+  2. Flags unusual high-value transaction surges (*e.g., Organic Kashmiri Saffron ₹1,950 + Desi Ghee ₹3,850*).
+  3. Automatically promotes customers to **VIP Gold Loyalty Status** and triggers celebratory **₹5,000+ Festive Gift Hampers**.
+  4. Provides interactive sensitivity sliders ($1.0\sigma$ to $3.5\sigma$) allowing shopkeepers to tune anomaly thresholds.
+
+---
+
 ## 📐 System Architecture & Data Flow
 
 ```mermaid

@@ -15,6 +15,7 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { Carousel } from '../common/Carousel';
+import { AcquiredAnomalyDetectorCard } from '../acquired/AcquiredAnomalyDetectorCard';
 
 interface SalesAnalyticsProps {
   onNavigateTab?: (tab: string) => void;
@@ -200,6 +201,9 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ onNavigateTab })
           <span>Export Financial Report (.CSV)</span>
         </button>
       </div>
+
+      {/* 🚨 ACQUIRED ASSET: ANOMALY DETECTION ENGINE (FROM VOLTIQ / ASHMIT-ROY) */}
+      <AcquiredAnomalyDetectorCard />
 
       {/* 🧠 AI BUSINESS HEALTH CARD */}
       <div className="bg-gradient-to-r from-[#12121e] via-[#161628] to-[#12121e] p-5 rounded-3xl border border-amber-500/40 shadow-2xl space-y-4">

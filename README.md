@@ -22,6 +22,14 @@
 
 ---
 
+## 🤝 HACQUIRE 2026 - Acquired Assets & Deal Register (The Trade Slide)
+
+| # | Acquired Asset Name | Seller Team | Purchase Price (₹ Cr) | Integration & Value Addition to APNA DUKAN | Acquired Repo Link |
+| :-: | :--- | :--- | :-: | :--- | :--- |
+| **1** | **🚨 Plug-and-Play Anomaly Detection Engine** | **Voltiq** *(Ashmit-Roy)* | **₹4.00 Cr** | Evaluates real-time POS transaction streams against statistical Z-score baselines ($\mu \pm Z\sigma$), flagging unusual revenue surges and automatically triggering VIP Gold loyalty upgrades & ₹5,000+ Festive Gift Hampers. | [`Ashmit-Roy/Voltiq/anomaly-detection-engine`](https://github.com/Ashmit-Roy/Voltiq/tree/main/anomaly-detection-engine) |
+
+---
+
 ## 🎬 30–45 Second Demo Videos & Interactive Demo Studio
 
 Judges and hackathon participants can view interactive 30–45 second video demos of all separable assets directly inside the application under the **Tradable Asset Marketplace & Demo Studio** tab, or directly via the standalone GitHub module directories above.
