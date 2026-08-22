@@ -4,7 +4,6 @@ import type { DeliveryPoint, UserRole } from '../../acquired_modules/access-rout
 import { 
   Navigation, 
   MapPin, 
-  ExternalLink, 
   Check, 
   X, 
   Zap,
@@ -79,29 +78,11 @@ export const AcquiredAccessRoutePage: React.FC = () => {
         <div>
           <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
             <Navigation className="w-6 h-6 text-emerald-400" />
-            Acquired Module: AccessRoute Engine
-            <span className="px-2.5 py-0.5 text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-full font-mono uppercase">
-              M&A Acquired Asset
-            </span>
+            AccessRoute Delivery & RBAC Engine
           </h2>
           <p className="text-xs text-slate-400">
             Dijkstra / TSP Nearest-Neighbor Route Optimizer & Role-Based Access Control (RBAC) Engine
           </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <a
-            href="https://github.com/Prabh707/AccessRoute"
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow cursor-pointer"
-          >
-            <span>Seller: Prabh707 / AccessRoute</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-          <span className="px-3.5 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs rounded-xl shadow">
-            Deal Price: ₹4.20 Cr
-          </span>
         </div>
       </div>
 

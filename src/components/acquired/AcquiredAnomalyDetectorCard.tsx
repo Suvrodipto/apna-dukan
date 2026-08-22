@@ -21,19 +21,12 @@ export const AcquiredAnomalyDetectorCard: React.FC = () => {
           </div>
           <div>
             <h3 className="font-extrabold text-white text-base tracking-tight flex items-center gap-2">
-              Acquired Asset: Anomaly Detection Engine
-              <span className="px-2.5 py-0.5 text-[9px] font-black bg-rose-500/20 text-rose-300 border border-rose-500/40 rounded-full font-mono uppercase">
-                M&A ACQUIRED FROM VOLTIQ
-              </span>
+              Real-Time Stream Anomaly Detector
             </h3>
             <p className="text-xs text-rose-300 font-mono">
               Statistical Z-Score Dispersion & Telemetry Surge Detector
             </p>
           </div>
-        </div>
-
-        <div className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold rounded-xl flex items-center gap-1.5 shadow">
-          <span>Seller: Ashmit-Roy / Voltiq</span>
         </div>
       </div>
 

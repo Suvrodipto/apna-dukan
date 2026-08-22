@@ -5,7 +5,6 @@ import {
   ShieldAlert, 
   Zap, 
   Activity, 
-  ExternalLink,
   Bot
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -83,29 +82,11 @@ export const AcquiredAnomalyPage: React.FC = () => {
         <div>
           <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
             <ShieldAlert className="w-6 h-6 text-rose-400" />
-            Acquired Module: Real-Time Anomaly Detection Engine
-            <span className="px-2.5 py-0.5 text-xs bg-rose-500/20 text-rose-300 border border-rose-500/40 rounded-full font-mono uppercase">
-              M&A Acquired Asset
-            </span>
+            Real-Time Anomaly Detection Engine
           </h2>
           <p className="text-xs text-slate-400">
             Statistical Z-Score dispersion model evaluating real-time POS streaming telemetry against historical baselines
           </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <a
-            href="https://github.com/Ashmit-Roy/Voltiq/tree/main/anomaly-detection-engine"
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow cursor-pointer"
-          >
-            <span>Seller: Ashmit-Roy / Voltiq</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-          <span className="px-3.5 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-xs rounded-xl shadow">
-            Deal Price: ₹4.00 Cr
-          </span>
         </div>
       </div>
 
