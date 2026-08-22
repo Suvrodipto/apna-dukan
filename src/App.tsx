@@ -111,8 +111,8 @@ export function App() {
         {activeTab === 'workers' && <WorkerManagement />}
         {activeTab === 'price-predictor' && <SmartPricePredictor />}
         {activeTab === 'ocr' && <BillOCRScanner onLoadIntoPOS={() => setActiveTab('pos')} />}
-        {activeTab === 'supplier' && <SupplierOrders role={role} />}
-        {activeTab === 'analytics' && <SalesAnalytics />}
+        {activeTab === 'supplier' && <SupplierOrders role={role} onNavigateTab={(t) => setActiveTab(t)} />}
+        {activeTab === 'analytics' && <SalesAnalytics onNavigateTab={(t) => setActiveTab(t)} />}
         {activeTab === 'marketplace' && <TradableAssetStudio />}
       </main>
 

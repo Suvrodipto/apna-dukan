@@ -13,12 +13,18 @@ import {
   DollarSign,
   Award,
   Clock,
-  ShieldCheck
+  ShieldCheck,
+  Zap,
+  RotateCcw,
+  Package,
+  ArrowRight
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { Carousel } from '../common/Carousel';
 
 interface SupplierOrdersProps {
   role: UserRole;
+  onNavigateTab?: (tab: string) => void;
 }
 
 export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) => {
@@ -159,6 +165,116 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
     }
   };
 
+  // MODULE 2: SMART SUPPLIER RECOMMENDATIONS CAROUSEL CARDS
+  const supplierRecommendationCards = [
+    (
+      <div key="supp-card-1" className="p-4 bg-gradient-to-r from-[#1c180e] via-[#1a1512] to-[#14141c] border border-amber-500/40 rounded-2xl space-y-3 shadow-lg hover:border-amber-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center font-bold">
+              <Award className="w-4 h-4" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">🏆 Best Price Supplier</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-emerald-500/20 text-emerald-300 rounded border border-emerald-500/30 font-mono">
+            SAVE ₹320
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          <strong>Amul Dairy Distributors Ltd.</strong> offers the lowest wholesale bulk rates with ₹320 overall savings on dairy items.
+        </p>
+        <button
+          onClick={handleAcceptAIRecommendation}
+          className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-[11px] font-black flex items-center gap-1 transition-all cursor-pointer shadow-md"
+        >
+          <span>Order Now</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    ),
+    (
+      <div key="supp-card-2" className="p-4 bg-gradient-to-r from-[#0e1624] via-[#10141c] to-[#14141c] border border-blue-500/40 rounded-2xl space-y-3 shadow-lg hover:border-blue-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/40 flex items-center justify-center font-bold">
+              <Zap className="w-4 h-4 text-blue-400 fill-current" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">⚡ Fastest Delivery Vendor</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-blue-500/20 text-blue-300 rounded border border-blue-500/30 font-mono">
+            1.2 DAYS AVG
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          <strong>Amul Dairy & Metro Wholesale</strong> guarantee express 24-hour dispatch for high-demand Kirana ration restocks.
+        </p>
+        <button
+          onClick={() => {
+            const table = document.getElementById('supplier-comparison-table');
+            if (table) table.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>View Supplier</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    ),
+    (
+      <div key="supp-card-3" className="p-4 bg-gradient-to-r from-[#18141c] via-[#15121a] to-[#14141c] border border-purple-500/40 rounded-2xl space-y-3 shadow-lg hover:border-purple-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/40 flex items-center justify-center font-bold">
+              <RotateCcw className="w-4 h-4" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">🔄 Frequently Ordered Items</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-purple-500/20 text-purple-300 rounded border border-purple-500/30 font-mono">
+            EVERY 7 DAYS
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          You reorder <strong>Atta 5kg, Sunflower Oil 1L, and Amul Milk</strong> every 7 days. Click below to generate instant multi-item PO.
+        </p>
+        <button
+          onClick={handleAutoBuildPO}
+          className="px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>Reorder Package</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    ),
+    (
+      <div key="supp-card-4" className="p-4 bg-gradient-to-r from-[#1c1014] via-[#181216] to-[#14141c] border border-rose-500/40 rounded-2xl space-y-3 shadow-lg hover:border-rose-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold">
+              <Package className="w-4 h-4" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">📦 Suggested Restock</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-rose-500/20 text-rose-300 rounded border border-rose-500/30 font-mono">
+            STOCK URGENCY
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          Based on sales velocity, <strong>Amul Milk & Surf Excel 1kg</strong> will run out within 48 hours. Create PO to prevent stock-outs.
+        </p>
+        <button
+          onClick={() => {
+            setOrderItems([{ productId: products[0]?.id || '', qty: 20 }]);
+            setShowCreatePOModal(true);
+          }}
+          className="px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>Create Order</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    )
+  ];
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -175,7 +291,7 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
           {lowStockProducts.length > 0 && (
             <button
               onClick={handleAutoBuildPO}
-              className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-amber-500/20 animate-pulse"
+              className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-amber-500/20 animate-pulse cursor-pointer"
             >
               <AlertTriangle className="w-4 h-4 fill-current" />
               <span>Auto-Build PO ({lowStockProducts.length} Low Items)</span>
@@ -187,7 +303,7 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
               setOrderItems([{ productId: products[0]?.id || '', qty: 10 }]);
               setShowCreatePOModal(true);
             }}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-blue-600/20"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-blue-600/20 cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Create Purchase Order</span>
@@ -278,8 +394,17 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
         )}
       </div>
 
+      {/* 🚀 MODULE 2: SMART SUPPLIER RECOMMENDATIONS CAROUSEL */}
+      <Carousel
+        items={supplierRecommendationCards}
+        title="🚚 Smart Supplier Recommendations Assistant"
+        badge="Vendor Intelligence"
+        subtitle="Explore best prices, fastest delivery options, and automated restock suggestions"
+        autoPlayInterval={7500}
+      />
+
       {/* 📊 SUPPLIER COMPARISON SCORE TABLE */}
-      <div className="p-5 bg-[#14141c] rounded-3xl border border-slate-800 space-y-4">
+      <div id="supplier-comparison-table" className="p-5 bg-[#14141c] rounded-3xl border border-slate-800 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="font-extrabold text-white text-base flex items-center gap-2">
             <Award className="w-5 h-5 text-amber-400" />
@@ -415,7 +540,7 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
                     {po.status === 'Sent' && (
                       <button
                         onClick={() => updatePOStatus(po, 'In-Transit')}
-                        className="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-xl"
+                        className="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-xl cursor-pointer"
                       >
                         Mark In-Transit
                       </button>
@@ -424,7 +549,7 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
                     {po.status === 'In-Transit' && (
                       <button
                         onClick={() => updatePOStatus(po, 'Fulfilled')}
-                        className="px-3 py-1 bg-emerald-500 text-slate-950 text-xs font-extrabold rounded-xl flex items-center gap-1"
+                        className="px-3 py-1 bg-emerald-500 text-slate-950 text-xs font-extrabold rounded-xl flex items-center gap-1 cursor-pointer"
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         Mark Stock Received
@@ -444,7 +569,7 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
           <div className="glass-panel w-full max-w-lg bg-[#14141c] border border-amber-500/40 rounded-3xl p-6 space-y-4 shadow-2xl text-xs">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <h3 className="font-bold text-white text-base">Create Purchase Order</h3>
-              <button onClick={() => setShowCreatePOModal(false)} className="text-slate-400 hover:text-white">
+              <button onClick={() => setShowCreatePOModal(false)} className="text-slate-400 hover:text-white cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -502,7 +627,7 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
                 <button
                   type="button"
                   onClick={() => setOrderItems([...orderItems, { productId: products[0]?.id || '', qty: 10 }])}
-                  className="text-xs text-amber-400 font-bold hover:underline pt-1 flex items-center gap-1"
+                  className="text-xs text-amber-400 font-bold hover:underline pt-1 flex items-center gap-1 cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" /> Add Another Item
                 </button>
@@ -511,14 +636,14 @@ export const SupplierOrders: React.FC<SupplierOrdersProps> = ({ role: _role }) =
               <div className="flex items-center gap-3 pt-3">
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black rounded-xl"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black rounded-xl cursor-pointer"
                 >
                   Dispatch Purchase Order
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowCreatePOModal(false)}
-                  className="px-4 py-2.5 bg-slate-800 text-slate-400 rounded-xl font-bold"
+                  className="px-4 py-2.5 bg-slate-800 text-slate-400 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>

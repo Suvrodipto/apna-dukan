@@ -8,10 +8,19 @@ import {
   CreditCard, 
   AlertTriangle, 
   Download, 
-  ArrowUpRight
+  ArrowUpRight,
+  Sparkles,
+  Package,
+  ArrowRight,
+  ShieldAlert
 } from 'lucide-react';
+import { Carousel } from '../common/Carousel';
 
-export const SalesAnalytics: React.FC = () => {
+interface SalesAnalyticsProps {
+  onNavigateTab?: (tab: string) => void;
+}
+
+export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ onNavigateTab }) => {
   const [bills, setBills] = useState<Bill[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -50,8 +59,6 @@ export const SalesAnalytics: React.FC = () => {
     { day: 'Sun', sales: 3100 }
   ];
 
-  const maxSale = Math.max(...salesData.map(d => d.sales));
-
   const exportCSV = () => {
     const csvContent = "data:text/csv;charset=utf-8," 
       + "Metric,Value\n"
@@ -70,6 +77,110 @@ export const SalesAnalytics: React.FC = () => {
     document.body.removeChild(link);
   };
 
+  // Smart Business Insights Carousel Cards
+  const insightCards = [
+    (
+      <div key="card-1" className="p-4 bg-gradient-to-r from-[#1c1014] via-[#1a1218] to-[#14141c] border border-rose-500/40 rounded-2xl space-y-3 shadow-lg hover:border-rose-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold">
+              <ShieldAlert className="w-4 h-4 animate-pulse" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">⚠️ Anomaly Alert</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-rose-500/20 text-rose-300 rounded border border-rose-500/30 font-mono">
+            URGENT
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          Unusual drop in Dairy sales detected today (-14% volume vs last week). Check cooling stock or supplier dispatch time.
+        </p>
+        <button
+          onClick={() => onNavigateTab && onNavigateTab('inventory')}
+          className="px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>View Details</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    ),
+    (
+      <div key="card-2" className="p-4 bg-gradient-to-r from-[#1c170d] via-[#181512] to-[#14141c] border border-amber-500/40 rounded-2xl space-y-3 shadow-lg hover:border-amber-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center font-bold">
+              <TrendingUp className="w-4 h-4" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">📈 Price Prediction</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-amber-500/20 text-amber-300 rounded border border-amber-500/30 font-mono">
+            AI ML
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          Tomato & vegetable wholesale prices may increase by 8% next week. Adjust retail catalog selling price to protect 20% margin.
+        </p>
+        <button
+          onClick={() => onNavigateTab && onNavigateTab('price-predictor')}
+          className="px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>Check Prediction</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    ),
+    (
+      <div key="card-3" className="p-4 bg-gradient-to-r from-[#18141c] via-[#16121a] to-[#14141c] border border-purple-500/40 rounded-2xl space-y-3 shadow-lg hover:border-purple-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/40 flex items-center justify-center font-bold">
+              <Package className="w-4 h-4" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">📦 Low Stock Alert</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-purple-500/20 text-purple-300 rounded border border-purple-500/30 font-mono">
+            {lowStockCount || 5} ITEMS
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          {lowStockCount || 5} products are running low on stock (Amul Milk, Surf Excel 1kg). Order restock to prevent peak-hour stock-out.
+        </p>
+        <button
+          onClick={() => onNavigateTab && onNavigateTab('inventory')}
+          className="px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>Manage Inventory</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    ),
+    (
+      <div key="card-4" className="p-4 bg-gradient-to-r from-[#0e1d15] via-[#121815] to-[#14141c] border border-emerald-500/40 rounded-2xl space-y-3 shadow-lg hover:border-emerald-500/70 transition-all group">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <h4 className="font-extrabold text-white text-xs">🔥 Sales Insight</h4>
+          </div>
+          <span className="px-2 py-0.5 text-[9px] font-black bg-emerald-500/20 text-emerald-300 rounded border border-emerald-500/30 font-mono">
+            +18.4% LIFT
+          </span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+          Your sales are 18.4% higher than last week! High-margin items like Kashmiri Saffron & Festive Hampers drove 42% of profits.
+        </p>
+        <button
+          onClick={() => onNavigateTab && onNavigateTab('analytics')}
+          className="px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+        >
+          <span>View Analytics</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    )
+  ];
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -83,7 +194,7 @@ export const SalesAnalytics: React.FC = () => {
 
         <button
           onClick={exportCSV}
-          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-sm"
+          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-sm cursor-pointer"
         >
           <Download className="w-4 h-4 text-emerald-400" />
           <span>Export Financial Report (.CSV)</span>
@@ -143,6 +254,7 @@ export const SalesAnalytics: React.FC = () => {
         </div>
       </div>
 
+      {/* Main KPI Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="glass-card p-4 rounded-2xl border border-slate-800 space-y-2">
           <div className="flex items-center justify-between text-slate-400 text-xs">
@@ -194,59 +306,100 @@ export const SalesAnalytics: React.FC = () => {
         </div>
       </div>
 
+      {/* 🚀 MODULE 1: SMART BUSINESS INSIGHTS CAROUSEL */}
+      <Carousel
+        items={insightCards}
+        title="🤖 Smart Business Insights Assistant"
+        badge="AI Real-Time Insights"
+        subtitle="Swipe or click arrows to explore diagnostic business alerts"
+        autoPlayInterval={7000}
+      />
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8 glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-white text-base">Weekly Revenue Trend (₹)</h3>
-            <span className="text-xs text-slate-400 font-mono">Aug 13 - Aug 19</span>
+            <span className="text-xs font-mono text-emerald-400 font-bold">+18.4% Growth Rate</span>
           </div>
 
-          <div className="h-56 flex items-end justify-between gap-3 pt-6 px-2 border-b border-slate-800">
-            {salesData.map((item, idx) => {
-              const heightPct = Math.round((item.sales / maxSale) * 100);
-              return (
-                <div key={idx} className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
-                  <div className="text-[10px] font-mono text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    ₹{item.sales}
-                  </div>
-                  <div
-                    className="w-full bg-gradient-to-t from-blue-600 to-emerald-400 rounded-t-lg transition-all group-hover:brightness-125"
-                    style={{ height: `${heightPct}%` }}
-                  />
-                  <span className="text-xs font-semibold text-slate-400">{item.day}</span>
+          {/* Pure SVG Line Graph */}
+          <div className="relative pt-4">
+            <svg className="w-full h-44 overflow-visible" viewBox="0 0 500 180">
+              <defs>
+                <linearGradient id="salesGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
+                </linearGradient>
+              </defs>
+
+              <polygon points="0,180 0,130 80,100 160,115 240,65 320,80 400,35 500,20 500,180" fill="url(#salesGrad)" />
+
+              <polyline
+                fill="none"
+                stroke="#f59e0b"
+                strokeWidth="3"
+                strokeLinecap="round"
+                points="0,130 80,100 160,115 240,65 320,80 400,35 500,20"
+              />
+
+              <circle cx="400" cy="35" r="5" fill="#f59e0b" className="animate-ping" />
+              <circle cx="400" cy="35" r="5" fill="#fbbf24" />
+            </svg>
+
+            <div className="flex justify-between text-[11px] font-mono text-slate-400 pt-2 border-t border-slate-800">
+              {salesData.map(d => (
+                <div key={d.day} className="text-center">
+                  <div>{d.day}</div>
+                  <div className="text-[10px] text-amber-400 font-bold">₹{d.sales}</div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="lg:col-span-4 glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-          <h3 className="font-bold text-white text-base">Khata Risk Classification</h3>
-          <p className="text-xs text-slate-400">Borrower profile based on credit limits vs debt</p>
+          <h3 className="font-bold text-white text-base">Category Sales Split</h3>
 
           <div className="space-y-3">
-            {['Low', 'Medium', 'High'].map(risk => {
-              const count = customers.filter(c => c.riskScore === risk).length;
-              const pct = Math.round((count / (customers.length || 1)) * 100);
-              return (
-                <div key={risk} className="space-y-1">
-                  <div className="flex justify-between text-xs font-semibold">
-                    <span className={risk === 'High' ? 'text-red-400' : risk === 'Medium' ? 'text-amber-400' : 'text-emerald-400'}>
-                      {risk} Risk Borrowers
-                    </span>
-                    <span className="text-slate-300 font-mono">{count} customers ({pct}%)</span>
-                  </div>
-                  <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
-                    <div
-                      className={`h-full rounded-full ${
-                        risk === 'High' ? 'bg-red-500' : risk === 'Medium' ? 'bg-amber-500' : 'bg-emerald-500'
-                      }`}
-                      style={{ width: `${pct}%` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs font-mono">
+                <span className="text-slate-300">Groceries & Flour</span>
+                <span className="text-amber-400 font-bold">42% (₹2,450)</span>
+              </div>
+              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full bg-amber-500 rounded-full w-[42%]" />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs font-mono">
+                <span className="text-slate-300">Dairy & Cold Storage</span>
+                <span className="text-blue-400 font-bold">28% (₹1,640)</span>
+              </div>
+              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full bg-blue-500 rounded-full w-[28%]" />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs font-mono">
+                <span className="text-slate-300">Dry Fruits & Kesar</span>
+                <span className="text-emerald-400 font-bold">18% (₹1,050)</span>
+              </div>
+              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full bg-emerald-500 rounded-full w-[18%]" />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs font-mono">
+                <span className="text-slate-300">Personal & Home Care</span>
+                <span className="text-purple-400 font-bold">12% (₹710)</span>
+              </div>
+              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full bg-purple-500 rounded-full w-[12%]" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
