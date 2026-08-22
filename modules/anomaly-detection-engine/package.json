@@ -1,0 +1,14 @@
+{
+  "name": "@apna-dukan/anomaly-detection-engine",
+  "version": "1.0.0",
+  "description": "Standalone Plug-and-Play Anomaly Detection Engine (Acquired from Voltiq / Ashmit-Roy)",
+  "main": "index.ts",
+  "license": "MIT",
+  "keywords": [
+    "anomaly-detection",
+    "z-score",
+    "telemetry-stream",
+    "retail-analytics",
+    "hacquire-2026"
+  ]
+}

@@ -1265,5 +1265,51 @@ console.log('Revenue KPI:', metrics[0].value);`,
     isLocked: false,
     askingPriceCr: 3.60,
     minPriceCr: 2.50
+  },
+  {
+    id: 'asset-acquired-anomaly',
+    name: '🚨 Plug-and-Play Anomaly Detection Engine',
+    tagline: 'Statistical Z-score dispersion & POS telemetry surge evaluation engine (Acquired from Voltiq)',
+    category: 'AI',
+    targetDomains: ['POS Stream Analytics', 'Fraud Prevention', 'Inventory Surges', 'Retail Telemetry'],
+    description: 'An acquired high-performance anomaly detection module evaluating real-time stream values against statistical baselines (Z-score dispersion) to flag unusual checkout spikes and trigger VIP Gold customer hampers.',
+    demoVideoDuration: '35 Seconds',
+    features: [
+      'Statistical Z-Score Dispersion model (Z = (X - μ) / σ)',
+      'Real-time stream telemetry scanner & surge alert bounds',
+      'Interactive sensitivity slider (1.0σ to 3.5σ)',
+      'Automated VIP Gold loyalty & ₹5,000+ Festive Gift Hamper triggers'
+    ],
+    integrationCodeSnippet: `import { AnomalyDetector } from '@apnadukan/anomaly-detection-engine';
+
+const detector = new AnomalyDetector(2.0);
+const res = detector.evaluate(5850, [1200, 1450, 1300, 1850]);
+console.log('Is Anomaly:', res.isAnomaly);`,
+    isLocked: false,
+    askingPriceCr: 4.00,
+    minPriceCr: 3.00
+  },
+  {
+    id: 'asset-acquired-access-route',
+    name: '🗺️ AccessRoute Delivery Route & RBAC Engine',
+    tagline: 'TSP Nearest-Neighbor delivery route optimizer & Role-Based Access Control matrix (Acquired from Prabh707)',
+    category: 'Workflow',
+    targetDomains: ['Kirana Delivery', 'Logistics Fleet', 'Access Control', 'Supply Chain'],
+    description: 'An acquired route optimization & security module calculating shortest delivery transit paths using Haversine equations ($O(V^2)$) to save fuel costs (₹/km) while enforcing role-based permissions across staff roles.',
+    demoVideoDuration: '40 Seconds',
+    features: [
+      'Nearest-Neighbor Travelling Salesperson (TSP) delivery path optimizer',
+      'Haversine spherical distance & transit time calculation',
+      'Fuel cost savings (₹/km) and efficiency score metrics',
+      'Role-Based Access Control (RBAC) security matrix (Owner, Cashier, Supplier, Delivery)'
+    ],
+    integrationCodeSnippet: `import { AccessRouteEngine } from '@apnadukan/access-route';
+
+const engine = new AccessRouteEngine();
+const res = engine.optimizeDeliveryRoute(startHub, waypoints);
+console.log('Fuel Savings:', res.fuelCostSavingsRs);`,
+    isLocked: false,
+    askingPriceCr: 4.20,
+    minPriceCr: 3.00
   }
 ];

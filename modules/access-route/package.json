@@ -1,0 +1,14 @@
+{
+  "name": "@apna-dukan/access-route",
+  "version": "1.0.0",
+  "description": "Standalone AccessRoute Delivery Route Optimizer & RBAC Control Engine (Acquired from Prabh707)",
+  "main": "index.ts",
+  "license": "MIT",
+  "keywords": [
+    "route-optimization",
+    "tsp-algorithm",
+    "haversine-distance",
+    "rbac-security",
+    "hacquire-2026"
+  ]
+}

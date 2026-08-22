@@ -207,6 +207,8 @@ All 9 software modules are completely separable with zero cross-module coupling,
 | **7** | **📦 Smart Inventory & Emergency Restock Engine** | Inventory | **₹3.80 Cr** | [`/modules/smart-inventory`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/smart-inventory) |
 | **8** | **💬 WhatsApp Reminders & Notification Engine** | Messaging | **₹3.75 Cr** | [`/modules/whatsapp-reminders-notifications`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/whatsapp-reminders-notifications) |
 | **9** | **📊 Executive Dashboard & Business Analytics** | Analytics | **₹3.60 Cr** | [`/modules/dashboard-analytics`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/dashboard-analytics) |
+| **10** | **🚨 Plug-and-Play Anomaly Detection Engine** *(Acquired)* | AI Telemetry | **₹4.00 Cr** | [`/modules/anomaly-detection-engine`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/anomaly-detection-engine) |
+| **11** | **🗺️ AccessRoute Delivery & RBAC Engine** *(Acquired)* | Workflow | **₹4.20 Cr** | [`/modules/access-route`](https://github.com/Suvrodipto/apna-dukan/tree/main/modules/access-route) |
 
 ---
 
