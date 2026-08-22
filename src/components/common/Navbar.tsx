@@ -25,7 +25,8 @@ import {
   Users,
   Wifi,
   WifiOff,
-  ShieldAlert
+  ShieldAlert,
+  Navigation
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -80,6 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'ocr', label: t.billOCR, icon: ScanLine, roles: ['owner', 'cashier'], badge: 'OCR' },
     { id: 'supplier', label: t.supplierOrders, icon: Truck, roles: ['owner', 'supplier'] },
     { id: 'acquired-anomaly', label: 'Anomaly Engine 🚨', icon: ShieldAlert, roles: ['owner', 'cashier', 'supplier'], badge: 'M&A Asset' },
+    { id: 'acquired-route', label: 'AccessRoute 🗺️', icon: Navigation, roles: ['owner', 'cashier', 'supplier'], badge: 'M&A Asset' },
     { id: 'analytics', label: t.salesAnalytics, icon: BarChart3, roles: ['owner'] },
     { id: 'marketplace', label: t.assetMarketplace, icon: Layers, roles: ['owner', 'cashier', 'supplier'], badge: '11 Assets' }
   ];

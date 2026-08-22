@@ -27,6 +27,7 @@
 | # | Acquired Asset Name | Seller Team | Purchase Price (₹ Cr) | Integration & Value Addition to APNA DUKAN | Acquired Repo Link |
 | :-: | :--- | :--- | :-: | :--- | :--- |
 | **1** | **🚨 Plug-and-Play Anomaly Detection Engine** | **Voltiq** *(Ashmit-Roy)* | **₹4.00 Cr** | Evaluates real-time POS transaction streams against statistical Z-score baselines ($\mu \pm Z\sigma$), flagging unusual revenue surges and automatically triggering VIP Gold loyalty upgrades & ₹5,000+ Festive Gift Hampers. | [`Ashmit-Roy/Voltiq/anomaly-detection-engine`](https://github.com/Ashmit-Roy/Voltiq/tree/main/anomaly-detection-engine) |
+| **2** | **🗺️ AccessRoute Delivery & RBAC Engine** | **Prabh707** | **₹4.20 Cr** | Optimizes Kirana home delivery & supplier restock transit routes using TSP nearest-neighbor algorithm while enforcing role-based access control (RBAC) security matrix across staff roles. | [`Prabh707/AccessRoute`](https://github.com/Prabh707/AccessRoute) |
 
 ---
 

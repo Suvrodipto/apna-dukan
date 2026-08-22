@@ -20,6 +20,7 @@ import { AIPitchSimulationModal } from './components/pos/AIPitchSimulationModal'
 import { Bot, PlayCircle, Truck } from 'lucide-react';
 
 import { AcquiredAnomalyPage } from './components/acquired/AcquiredAnomalyPage';
+import { AcquiredAccessRoutePage } from './components/acquired/AcquiredAccessRoutePage';
 
 export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
@@ -115,6 +116,7 @@ export function App() {
         {activeTab === 'ocr' && <BillOCRScanner onLoadIntoPOS={() => setActiveTab('pos')} />}
         {activeTab === 'supplier' && <SupplierOrders role={role} onNavigateTab={(t) => setActiveTab(t)} />}
         {activeTab === 'acquired-anomaly' && <AcquiredAnomalyPage />}
+        {activeTab === 'acquired-route' && <AcquiredAccessRoutePage />}
         {activeTab === 'analytics' && <SalesAnalytics onNavigateTab={(t) => setActiveTab(t)} />}
         {activeTab === 'marketplace' && <TradableAssetStudio />}
       </main>
